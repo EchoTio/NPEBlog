@@ -1,24 +1,50 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" th:with="title='标签云', top_poster='云'
+, bottom_content='山僧不解数甲子，一叶落知天下秋'">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>d3-cloud（v5）を用いたワードクラウドサンプル</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>[[${title}]]</title>
+    <th:block th:replace="/blog/common/_common_css::common_css">
+
+    </th:block>
 </head>
 
 <body>
-<header></header>
-<div id="cloud"></div>
-<footer></footer>
+
+<th:block th:replace="/blog/common/_head::navbar">
+
+</th:block>
+<th:block th:replace="/blog/common/_poster::navbar(${top_poster}, ${bottom_content})">
+
+</th:block>
+
+<div id="cloud" style="width: 600px; height: 490px;margin: 0 auto;"></div>
+<div style="text-align: center">
+    <div id="presets"></div>
+        <div id="custom-area">
+            <h3><label>[标签云]</label></h3>
+        </div>
+</div>
+
+<th:block th:replace="/blog/common/_common_js::common_js">
+
+</th:block>
+
+<th:block th:replace="/blog/common/_footer::footer">
+
+</th:block>
 
 <!-- word cloud -->
-<script type="text/javascript" th:src="@{/js/jquery-3.4.1.js}"></script>
 <script th:src="@{/plugins/d3/d3.min.js}" type="text/javascript"></script>
 <script th:src="@{/plugins/d3/d3.layout.cloud.js}" type="text/javascript" ></script>
-<!--<script th:src="@{/plugins/d3/d3.cloud.options.smallclover.js}" type="text/javascript" ></script>-->
 <script type="text/javascript" th:inline="javascript">
     $(document).ready(function(){
-        var DATA_FILE_PATH = /*[[@{/blog/tags_cloud/json}]]*/"tags_cloud/json"; // 読み込みデータファイル
-        var TARGET_ELEMENT_ID = '#cloud'; // 描画先
+        var DATA_FILE_PATH = /*[[@{/blog/tags_cloud/json}]]*/"/blog/tags_cloud/json"; //从后台获取标签数据
+        var TARGET_ELEMENT_ID = '#cloud';
         d3.json(DATA_FILE_PATH).then(function(data) { // v5
             var h = 490;
             var w = 600;

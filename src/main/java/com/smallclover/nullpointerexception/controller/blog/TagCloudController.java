@@ -26,7 +26,7 @@ public class TagCloudController {
 
     private ArticleService articleService;
 
-    @RequestMapping("")
+    @RequestMapping(value = {"/",""})
     public String index()
     {
         return "/blog/tags_cloud";
@@ -38,19 +38,18 @@ public class TagCloudController {
         var articles = articleService.getAllArticles();
         var map = new HashMap<String, Integer>();
         for (Article article: articles){
+            // 单个标签之间是以逗号分隔
             String[] tags = article.getTags().split(",");
             for (String tag: tags){
                 map.put(tag, map.getOrDefault(tag, 0) + 1);
             }
         }
 
-//        var tags = Arrays.asList(new TagDTO("hello", 2),
-//                new TagDTO("word", 25));
         var tags = new ArrayList<TagDTO>();
         for (Map.Entry<String, Integer> entry: map.entrySet()){
             var tag = new TagDTO();
             tag.setWord(entry.getKey());
-            tag.setCount(entry.getValue() * 14);
+            tag.setCount(entry.getValue());
             tags.add(tag);
         }
 

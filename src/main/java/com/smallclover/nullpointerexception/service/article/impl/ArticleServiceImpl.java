@@ -3,6 +3,8 @@ package com.smallclover.nullpointerexception.service.article.impl;
 import com.smallclover.nullpointerexception.model.Article;
 import com.smallclover.nullpointerexception.mapper.ArticleMapper;
 import com.smallclover.nullpointerexception.service.article.ArticleService;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -54,11 +56,13 @@ public class ArticleServiceImpl implements ArticleService {
         return articleMapper.getArticleCount();
     }
 
+    @CacheEvict(cacheNames = "articles")
     @Override
     public long deleteArticleById(long articleId) {
         return articleMapper.deleteArticleById(articleId,true );
     }
 
+    @CachePut(cacheNames = "articles")
     @Override
     public boolean insertArticle(Article article) {
         // 浏览量

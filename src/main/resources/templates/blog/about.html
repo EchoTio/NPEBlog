@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <title>[[${title}]]</title>
-  <th:block th:replace="/blog/common/_common_css">
+  <th:block th:replace="/blog/common/_common_css::common_css">
 
   </th:block>
 
@@ -16,7 +16,7 @@
 
 <body>
 
-<th:block th:replace="/blog/common/_head">
+<th:block th:replace="/blog/common/_head::navbar">
 
 </th:block>
 <th:block th:replace="/blog/common/_poster::navbar(${top_poster}, ${bottom_content})">
@@ -67,14 +67,9 @@
 <th:block th:replace="/blog/common/_footer::footer">
 
 </th:block>
-
-  <!-- Bootstrap core JavaScript -->
-  <script th:src="@{/blog/vendor/jquery/jquery.min.js}"></script>
-  <script th:src="@{/blog/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
-
-  <!-- Custom scripts for this template -->
-  <script th:src="@{/blog/js/clean-blog.min.js}"></script>
-
 </body>
 
+<th:block th:replace="/blog/common/_common_js::common_js">
+
+</th:block>
 </html>

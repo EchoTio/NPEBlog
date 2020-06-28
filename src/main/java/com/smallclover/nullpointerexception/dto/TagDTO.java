@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
+ * 标签DTO
  * @Author: Amadeus
  * @Date: 2020/6/24 21:14
  */
@@ -12,6 +13,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TagDTO {
+    // 标签名
     private String word;
+    // 该标签的数量
     private int count;
 }
