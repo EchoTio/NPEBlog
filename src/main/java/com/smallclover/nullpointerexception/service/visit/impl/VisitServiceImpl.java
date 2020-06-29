@@ -4,6 +4,7 @@ import com.smallclover.nullpointerexception.service.visit.VisitService;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,7 @@ import java.util.*;
 public class VisitServiceImpl implements VisitService {
 
     @Autowired
-    private StringRedisTemplate redisTemplate;
+    private RedisTemplate<String, Object> redisTemplate;
     // 如果直接使用Lombok会报错无法注入
     // @AllArgsConstructor注解会尝试注入该字段。
     private String articleCntKey;

@@ -6,6 +6,7 @@ import com.smallclover.nullpointerexception.service.article.ArticleService;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -41,7 +42,7 @@ public class ArticleServiceImpl implements ArticleService {
      * @param id 文章id
      * @return 文章实体类
      */
-    @Cacheable(cacheNames = "article")
+    @Cacheable(cacheNames = "article", key = "#id")
     @Override
     public Article getArticleById(long id) {
         return articleMapper.getArticleById(id);
@@ -56,13 +57,16 @@ public class ArticleServiceImpl implements ArticleService {
         return articleMapper.getArticleCount();
     }
 
-    @CacheEvict(cacheNames = "articles")
+    @Caching(evict = {
+            @CacheEvict(cacheNames = "article", key = "#articleId"),
+            @CacheEvict(cacheNames = "articles", allEntries = true)
+    })
     @Override
     public long deleteArticleById(long articleId) {
         return articleMapper.deleteArticleById(articleId,true );
     }
 
-    @CachePut(cacheNames = "articles")
+    @CacheEvict(cacheNames = "articles", allEntries = true)
     @Override
     public boolean insertArticle(Article article) {
         // 浏览量
