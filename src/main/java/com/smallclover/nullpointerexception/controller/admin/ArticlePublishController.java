@@ -1,18 +1,18 @@
 package com.smallclover.nullpointerexception.controller.admin;
 
-import com.smallclover.nullpointerexception.dto.ArticlePublishDTO;
-import com.smallclover.nullpointerexception.mapper.ArticleMapper;
+import com.smallclover.nullpointerexception.dto.ArticleDTO;
 import com.smallclover.nullpointerexception.model.Article;
-import com.smallclover.nullpointerexception.property.NPEResourcesProperties;
 import com.smallclover.nullpointerexception.service.article.ArticleService;
 import com.smallclover.nullpointerexception.service.article.FileService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,13 +45,11 @@ public class ArticlePublishController {
      * @return
      */
     @PostMapping("/add/content")
-    public Map<String, Object> addArticle(@RequestBody ArticlePublishDTO articlePublishDTO){
+    public ResponseEntity addArticle(@Valid @RequestBody ArticleDTO articleDTO){
         var article = new Article();
-        BeanUtils.copyProperties(articlePublishDTO, article);
+        BeanUtils.copyProperties(articleDTO, article);
         articleService.insertArticle(article);
-        var map = new HashMap<String, Object>();
-        map.put("url", "list");
-        return map;
+        return ResponseEntity.ok().build();
     }
 
 

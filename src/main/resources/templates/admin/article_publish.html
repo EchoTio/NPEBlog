@@ -164,8 +164,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
     // type 如果写错了将无法执行js
 
     $("#submit").on("click", function () {
-        console.log("提交文章");
-        submitArticle("submit");
+        Swal.fire({
+            title: '发布',
+            text: "是否确定发布文章",
+            icon: 'warning',
+            showCancelButton: true,
+            cancelButtonText:'取消',
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '发布'
+        }).then((result) => {
+            if (result.value) {
+                submitArticle("submit");
+            }
+        })
     });
     // 是否开启评论
     let toggleComment = true;
@@ -228,18 +240,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 category:category,
                 status:status
             }),
-            // data:{
-            //     html:htmlContent,
-            //     markdown:markdownContent
-            // },
             type: "POST",
             contentType: "application/json",
             success: function (data) {
                 console.log("success");
-                //window.location.href = "/blog/article/"+data.url;
+                Swal.fire(
+                    "文章:" + "[" + title + "]" + '已发布!',
+                    '文章发布成功',
+                    'success'
+                )
             },
-            error: function () {
-                console.log("fail");
+            error: function (data) {
+                console.log(data);
+                Swal.fire(
+                    "文章:" + "[" + title + "]" + '未发布!',
+                    '文章发布失败',
+                    'error'
+                )
             }
         })
     }
