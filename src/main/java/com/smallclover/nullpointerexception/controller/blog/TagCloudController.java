@@ -19,7 +19,7 @@ import java.util.Map;
  * @Author: Amadeus
  * @Date: 2020/6/23 21:36
  */
-@RequestMapping("/blog/tags_cloud")
+@RequestMapping("/blog/tags-cloud")
 @Controller
 @AllArgsConstructor
 public class TagCloudController {
