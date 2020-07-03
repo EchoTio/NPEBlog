@@ -1,10 +1,7 @@
 package com.smallclover.nullpointerexception.mapper;
 
 import com.smallclover.nullpointerexception.model.Tag;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -26,4 +23,11 @@ public interface TagMapper {
             @Result(property = "deleteFlag", column = "delete_flag")
     })
     List<Tag> getAllTags();
+
+    @Select("SELECT article_id FROM tag WHERE tag_name=#{tagName}")
+    List<Long> getAllArticleIdByTagName(String tagName);
+
+    @Select("SELECT * FROM tag WHERE article_id=#{articleId}")
+    @ResultMap("tag")
+    List<Tag> getAllTagByArticleId(long articleId);
 }

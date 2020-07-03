@@ -3,17 +3,17 @@ package com.smallclover.nullpointerexception.controller.blog;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.smallclover.nullpointerexception.dto.TagDTO;
+import com.smallclover.nullpointerexception.mapper.TagMapper;
 import com.smallclover.nullpointerexception.model.Article;
+import com.smallclover.nullpointerexception.model.Tag;
 import com.smallclover.nullpointerexception.service.article.ArticleService;
+import com.smallclover.nullpointerexception.service.tag.TagService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Author: Amadeus
@@ -24,7 +24,7 @@ import java.util.Map;
 @AllArgsConstructor
 public class TagCloudController {
 
-    private ArticleService articleService;
+    private TagService tagService;
 
     @RequestMapping(value = {"/",""})
     public String index()
@@ -33,16 +33,15 @@ public class TagCloudController {
     }
 
     @RequestMapping("/json")
-    public ResponseEntity tagCloud(){
+    public ResponseEntity<List<TagDTO>> tagCloud(){
 
-        var articles = articleService.getAllArticles();
+        List<Tag> tagList = tagService.getAllTags();
+
         var map = new HashMap<String, Integer>();
-        for (Article article: articles){
-            // 单个标签之间是以逗号分隔
-            String[] tags = article.getTags().split(",");
-            for (String tag: tags){
-                map.put(tag, map.getOrDefault(tag, 0) + 1);
-            }
+
+
+        for (Tag tag: tagList){
+            map.put(tag.getTagName(), map.getOrDefault(tag.getTagName(), 0) + 1);
         }
 
         var tags = new ArrayList<TagDTO>();

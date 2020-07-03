@@ -46,6 +46,7 @@ public class ArticlePublishController {
      */
     @PostMapping("/add/content")
     public ResponseEntity addArticle(@Valid @RequestBody ArticleDTO articleDTO){
+        //TODO tag表也需要插入，这里需要事物
         var article = new Article();
         BeanUtils.copyProperties(articleDTO, article);
         articleService.insertArticle(article);
