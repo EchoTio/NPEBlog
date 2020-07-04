@@ -64,5 +64,5 @@ public interface ArticleMapper {
     @Update("UPDATE article SET status=#{status},publish=#{publish} WHERE id = #{articleId}")
     long updateArticleById(long articleId, boolean publish, boolean status);
 
-
+    List<Article> getArticlesByIds(List<Long> ids);
 }

@@ -84,4 +84,9 @@ public class ArticleServiceImpl implements ArticleService {
         long count = articleMapper.updateArticleById(articleId, true, false);
         return count >= 0;
     }
+
+    @Override
+    public List<Article> getArticlesByIds(List<Long> articleIds) {
+        return articleMapper.getArticlesByIds(articleIds);
+    }
 }

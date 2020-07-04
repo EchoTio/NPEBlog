@@ -37,4 +37,6 @@ public interface ArticleService {
     boolean insertArticle(Article article);
 
     boolean publishArticle(long articleId);
+
+    List<Article> getArticlesByIds(List<Long> articleIds);
 }

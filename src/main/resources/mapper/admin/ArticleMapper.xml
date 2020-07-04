@@ -32,4 +32,17 @@
                 #{deleteFlag}
                )
     </insert>
+
+    <select id="getArticlesByIds" resultType="com.smallclover.nullpointerexception.model.Article">
+        SELECT
+            *
+        FROM
+            article
+        WHERE
+            id IN 
+        <foreach collection="list" item="articleId" index="index"
+            open="(" separator="," close=")">
+            #{articleId}
+        </foreach>
+    </select>
 </mapper>

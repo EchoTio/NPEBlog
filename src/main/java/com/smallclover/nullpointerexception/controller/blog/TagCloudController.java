@@ -11,6 +11,7 @@ import com.smallclover.nullpointerexception.service.tag.TagService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.*;
@@ -25,6 +26,7 @@ import java.util.*;
 public class TagCloudController {
 
     private TagService tagService;
+    private ArticleService articleService;
 
     @RequestMapping(value = {"/",""})
     public String index()
@@ -32,6 +34,10 @@ public class TagCloudController {
         return "/blog/tags_cloud";
     }
 
+    /**
+     * 获取标签云
+     * @return
+     */
     @RequestMapping("/json")
     public ResponseEntity<List<TagDTO>> tagCloud(){
 
@@ -40,6 +46,7 @@ public class TagCloudController {
         var map = new HashMap<String, Integer>();
 
 
+        // 标签名:权重
         for (Tag tag: tagList){
             map.put(tag.getTagName(), map.getOrDefault(tag.getTagName(), 0) + 1);
         }
@@ -53,5 +60,13 @@ public class TagCloudController {
         }
 
         return ResponseEntity.ok(tags);
+    }
+
+    @RequestMapping("/{tag_name}")
+    public ResponseEntity<List<Article>> getTagNameHoldArticles(@PathVariable("tag_name") String tagName){
+        List<Long> articleIds = tagService.getAllArticleIdByTagName(tagName);
+        List<Article> articles = articleService.getArticlesByIds(articleIds);
+
+        return ResponseEntity.ok(articles);
     }
 }
