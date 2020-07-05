@@ -89,4 +89,9 @@ public class ArticleServiceImpl implements ArticleService {
     public List<Article> getArticlesByIds(List<Long> articleIds) {
         return articleMapper.getArticlesByIds(articleIds);
     }
+
+    @Override
+    public List<Article> getArticlesOrderByCreateTime() {
+        return articleMapper.getAllArticlesOrderByCreateTime();
+    }
 }

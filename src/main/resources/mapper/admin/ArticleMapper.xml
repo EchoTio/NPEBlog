@@ -32,8 +32,8 @@
                 #{deleteFlag}
                )
     </insert>
-
-    <select id="getArticlesByIds" resultType="com.smallclover.nullpointerexception.model.Article">
+    <!-- 注解里定义的resultMap引用，否则无法转换 -->
+    <select id="getArticlesByIds" resultType="com.smallclover.nullpointerexception.model.Article" resultMap="article">
         SELECT
             *
         FROM

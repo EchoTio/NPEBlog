@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" th:with="title='归档', top_poster='往昔'
-, bottom_content='人生天地之间，若白驹之过隙，忽然而已'">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" th:with="title='标签详情', top_poster=${tag_name}
+, bottom_content='物以类聚，人以群分'">
 <head>
     <meta charset="UTF-8">
     <title>Timeline scribble</title>
@@ -28,7 +28,7 @@
             <h3>[[${article.title}]]</h3>
             [[${article.desc}]]<br>
             <p><strong><a th:href="@{'/blog/article/detail/' + ${article.id}}">继续阅读</a></strong>
-        </div>
+       </div>
     </li>
 </ul>
 

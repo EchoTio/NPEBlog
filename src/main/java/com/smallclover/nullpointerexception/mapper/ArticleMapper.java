@@ -36,6 +36,14 @@ public interface ArticleMapper {
     List<Article> getAllArticles();
 
     /**
+     * 获取所有文章，根据创建时间降顺
+     * @return
+     */
+    @Select("SELECT * FROM article ORDER BY create_time DESC")
+    @ResultMap("article")
+    List<Article> getAllArticlesOrderByCreateTime();
+
+    /**
      * 根据指定的id来获得文章
      * @param id 文章id
      * @return 文章实体类

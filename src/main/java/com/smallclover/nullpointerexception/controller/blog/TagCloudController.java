@@ -11,6 +11,7 @@ import com.smallclover.nullpointerexception.service.tag.TagService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -63,10 +64,10 @@ public class TagCloudController {
     }
 
     @RequestMapping("/{tag_name}")
-    public ResponseEntity<List<Article>> getTagNameHoldArticles(@PathVariable("tag_name") String tagName){
+    public String getTagNameHoldArticles(@PathVariable("tag_name") String tagName, Model model){
         List<Long> articleIds = tagService.getAllArticleIdByTagName(tagName);
         List<Article> articles = articleService.getArticlesByIds(articleIds);
-
-        return ResponseEntity.ok(articles);
+        model.addAttribute("articles", articles);
+        return "/blog/tag_hold_articles";
     }
 }
