@@ -25,6 +25,7 @@ public class ArchiveController {
     public String index(Model model){
         // TODO 前台blog分页共通
         // TODO 如何根据年份来分
+        // TODO 开发日志页面显示问题，后台提交提示问题
         List<Article> articles = articleService.getArticlesOrderByCreateTime();
         model.addAttribute("articles", articles);
         return "/blog/archive";
