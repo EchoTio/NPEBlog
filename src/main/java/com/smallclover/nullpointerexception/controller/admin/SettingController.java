@@ -30,6 +30,15 @@ public class SettingController {
         return "/admin/setting";
     }
 
+    /**
+     * 系统配置更新
+     * @param id id
+     * @param siteName 站点名称
+     * @param siteDesc 站点描述
+     * @param appVersion app 版本
+     * @param github github 链接
+     * @return
+     */
     @PostMapping("/update")
     public @ResponseBody ResponseEntity update(@RequestParam("id") String id,
                                                @RequestParam("modifiedSiteName") String siteName,

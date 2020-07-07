@@ -33,7 +33,8 @@ public class ArticleManagerController {
     public String index(@RequestParam(required = true, defaultValue = "1") Integer page,
                         @RequestParam(required = true, defaultValue = "10") Integer pageSize,
                         Model model){
-            PageHelper.startPage(page, pageSize);
+        //TODO 分页问题
+        PageHelper.startPage(page, pageSize);
         List<Article> articleList = articleService.getAllArticles();
         var pageInfo = new PageInfo<>(articleList);
         model.addAttribute("articles", articleList);
@@ -70,6 +71,11 @@ public class ArticleManagerController {
         }
     }
 
+    /**
+     * 文章发布，id根据传入自动生成
+     * @param articleId
+     * @return
+     */
     @PostMapping("publish")
     public @ResponseBody ResponseEntity publishArticle(@RequestParam long articleId){
         boolean result = articleService.publishArticle(articleId);

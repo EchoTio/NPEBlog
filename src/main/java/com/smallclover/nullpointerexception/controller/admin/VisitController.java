@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
+ *
  * @Author: Amadeus
  * @Date: 2020/6/3 21:30
  */
@@ -21,7 +22,6 @@ public class VisitController {
 
     @RequestMapping("/visit")
     public @ResponseBody VisitDTO visit(VisitReqDTO reqDTO){
-//        reqDTO.setApp("blog");
         VisitDTO visitDTO = new VisitDTO();
         visitService.build("blog");
         visitDTO.setTime(visitService.getArticleAccessRecord());

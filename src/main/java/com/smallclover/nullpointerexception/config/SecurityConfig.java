@@ -17,6 +17,7 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
+ * 权限配置
  * @Author: Amadeus
  * @Date: 2020/3/29 23:01
  */
