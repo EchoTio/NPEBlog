@@ -20,7 +20,6 @@ public interface CategoryMapper {
     @Select("SELECT * FROM category")
     @Results(id = "category", value = {
             @Result(property = "createTime", column = "create_time"),
-            @Result(property = "articleId", column = "article_id"),
             @Result(property = "categoryName", column = "category_name"),
             @Result(property = "updateTime", column = "update_time"),
             @Result(property = "deleteFlag", column = "delete_flag")

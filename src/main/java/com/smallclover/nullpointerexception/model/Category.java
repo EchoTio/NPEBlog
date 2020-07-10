@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 @Data
 public class Category {
     private long id;
-    private long articleId;
     private String categoryName;
     private LocalDateTime updateTime;
     private LocalDateTime createTime;

@@ -24,10 +24,7 @@ public class CategoryController {
 
     private TagService tagService;
     private CategoryService categoryService;
-
-
-    private static final String[] COLORS = {"default", "primary", "success", "info", "warning", "danger", "inverse", "purple", "pink"};
-
+    //TODO redis 开发跟生产分开
     @RequestMapping("/manager")
     public String index(Model model){
         var tags = tagService.getAllTags()
@@ -35,21 +32,10 @@ public class CategoryController {
                 .map(Tag::getTagName)
                 .distinct()
                 .collect(Collectors.toList());
-        var categories = categoryService.selectAllCategories()
-                .stream()
-                .map(Category::getCategoryName)
-                .distinct()
-                .collect(Collectors.toList());
-        model.addAttribute("randColor", rand_color());
+        var categories = categoryService.selectAllCategories();
         model.addAttribute("tags", tags);
         model.addAttribute("categories", categories);
         return "admin/category";
-    }
-
-    private String rand_color() {
-        Random random = new Random();
-        int r =  random.nextInt(COLORS.length - 1) % (COLORS.length) ;
-        return COLORS[r];
     }
 
 }

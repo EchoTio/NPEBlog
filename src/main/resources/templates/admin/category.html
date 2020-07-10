@@ -49,8 +49,8 @@
                         <div class="card-body">
                             <th:block th:each="tag: ${tags}">
                                 <div class="btn-group">
-                                    <button type="button" th:class="'btn btn-'+${randColor}">[[${tag}]]</button>
-                                    <button type="button" th:class="'btn btn-'+${randColor}+' dropdown-toggle dropdown-icon'" data-toggle="dropdown">
+                                    <button type="button" class="btn btn-default">[[${tag}]]</button>
+                                    <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown">
                                         <span class="sr-only">Toggle Dropdown</span>
                                     </button>
                                     <div class="dropdown-menu" role="menu">
@@ -75,9 +75,9 @@
                         <!-- /.card-header -->
                         <div class="card-body">
                             <th:block th:each="category: ${categories}">
-                                <div class="btn-group">
-                                    <button type="button" th:class="'btn btn-'+${randColor}">[[${category}]]</button>
-                                    <button type="button" th:class="'btn btn-'+${randColor}+' dropdown-toggle dropdown-icon'" data-toggle="dropdown">
+                                <div class="btn-group" th:if="${!category.deleteFlag}">
+                                    <button type="button" class="btn btn-default">[[${category.categoryName}]]</button>
+                                    <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown">
                                         <span class="sr-only">Toggle Dropdown</span>
                                     </button>
                                     <div class="dropdown-menu" role="menu">
