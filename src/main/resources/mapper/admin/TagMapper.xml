@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smallclover.nullpointerexception.mapper.TagMapper">
+    <!-- 注解里定义的resultMap引用，否则无法转换 -->
+    <select id="getTagsByTagNames" resultType="com.smallclover.nullpointerexception.model.Tag" resultMap="tag">
+        SELECT
+            *
+        FROM
+            tag_article ta
+        INNER JOIN tag t on ta.tag_id = t.id
+        WHERE
+            ta.delete_flag = false
+        AND
+            t.delete_flag = false
+        AND
+            t.tag_name
+        IN
+        <foreach collection="list" item="tagName" index="index"
+                 open="(" separator="," close=")">
+            #{tagName}
+        </foreach>
+    </select>
+</mapper>

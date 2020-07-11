@@ -1,5 +1,6 @@
 package com.smallclover.nullpointerexception.service.tag;
 
+import com.smallclover.nullpointerexception.model.Article;
 import com.smallclover.nullpointerexception.model.Tag;
 
 import java.util.List;
@@ -11,6 +12,6 @@ import java.util.List;
 public interface TagService {
 
     List<Tag> getAllTags();
-    List<Long> getAllArticleIdByTagName(String tagName);
-    List<Tag> getAllTagByArticleId(long articleId);
+    List<Article> getArticlesByTagName(String tagName);
+    List<Tag> getTagsByTagNames(List<String> tagNames);
 }
