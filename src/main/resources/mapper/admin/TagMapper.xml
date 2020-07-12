@@ -20,4 +20,32 @@
             #{tagName}
         </foreach>
     </select>
+
+    <resultMap id="articleTagCategory" type="com.smallclover.nullpointerexception.model.ArticleTagCategory">
+        <result property="articleId" column="article_id" />
+        <result property="tagId" column="tag_id" />
+        <result property="tagName" column="tag_name" />
+        <result property="categoryId" column="category_id" />
+        <result property="categoryName" column="category_name" />
+    </resultMap>
+
+    <select id="getTagsByArticleIds" resultMap="articleTagCategory">
+        SELECT * FROM tag_article ta INNER  JOIN  tag t ON ta.tag_id = t.id
+        WHERE ta.delete_flag = false AND t.delete_flag = false
+        AND ta.article_id IN
+        <foreach collection="list" item="articleId" index="index"
+                 open="(" separator="," close=")">
+            #{articleId}
+        </foreach>
+    </select>
+
+    <select id="getCategoryByArticleIds" resultMap="articleTagCategory">
+        SELECT * FROM category_article ca INNER  JOIN  article a ON ca.article_id = a.id
+        WHERE ca.delete_flag = false AND a.delete_flag = false
+        AND ca.article_id IN
+        <foreach collection="list" item="articleId" index="index"
+                 open="(" separator="," close=")">
+            #{articleId}
+        </foreach>
+    </select>
 </mapper>

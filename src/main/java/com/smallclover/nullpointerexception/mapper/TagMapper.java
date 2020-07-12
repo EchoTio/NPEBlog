@@ -1,5 +1,6 @@
 package com.smallclover.nullpointerexception.mapper;
 
+import com.smallclover.nullpointerexception.model.ArticleTagCategory;
 import com.smallclover.nullpointerexception.model.Tag;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
@@ -27,4 +28,8 @@ public interface TagMapper {
     Tag getTagIdByTagName(String tagName);
 
     List<Tag> getTagsByTagNames(List<String> tagNames);
+
+    List<ArticleTagCategory> getTagsByArticleIds(List<Long> articleIds);
+
+    List<ArticleTagCategory> getCategoryByArticleIds(List<Long> articleIds);
 }

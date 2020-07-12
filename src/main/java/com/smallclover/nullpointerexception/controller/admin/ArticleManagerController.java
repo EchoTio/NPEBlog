@@ -35,7 +35,7 @@ public class ArticleManagerController {
                         Model model){
         //TODO 分页问题
         PageHelper.startPage(page, pageSize);
-        List<Article> articleList = articleService.getAllArticles();
+        List<Article> articleList = articleService.getAllArticleNoCategory();
         var pageInfo = new PageInfo<>(articleList);
         model.addAttribute("articles", articleList);
         model.addAttribute("pageInfo", pageInfo);

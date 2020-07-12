@@ -3,6 +3,7 @@ package com.smallclover.nullpointerexception.dto;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
+import java.sql.Timestamp;
 
 /**
  * 文章DTO
@@ -11,6 +12,8 @@ import javax.validation.constraints.NotBlank;
  */
 @Data
 public class ArticleDTO {
+    // id
+    private long id;
     // 标题
     @NotBlank(message = "标题不能为空")
     private String title;
@@ -35,6 +38,8 @@ public class ArticleDTO {
     private boolean status;
     // 是否发布
     private boolean publish;
+    // 文章创建时间
+    private Timestamp createTime;
     // 删除标志
     private boolean deleteFlag;
 }

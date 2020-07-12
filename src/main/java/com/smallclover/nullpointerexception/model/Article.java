@@ -26,10 +26,6 @@ public class Article implements Serializable {
     private Timestamp createTime;
     // 文章浏览量(点击量)
     private int contentView;
-    // 分类
-    private String category;
-    // 关键词
-    private String tags;
     // 是否开启评论
     private boolean comment;
     // 是否是草稿

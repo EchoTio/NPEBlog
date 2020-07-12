@@ -1,4 +1,4 @@
-INSERT INTO article (title, `desc`, md_content, html_content, content_view, create_time, comment, status,publish, category, tags, delete_flag)
+INSERT INTO article (title, `desc`, md_content, html_content, content_view, create_time, comment, status,publish, delete_flag)
 VALUES (
     'HelloWorld',
     'This is a HelloWorld',
@@ -21,11 +21,9 @@ public class HelloWorld{
     true,
     false,
     true,
-    '技术',
-    'java,helloworld',
     false
 );
-INSERT INTO article (title, `desc`, md_content, html_content, content_view, create_time, comment, status,publish, category, tags, delete_flag)
+INSERT INTO article (title, `desc`, md_content, html_content, content_view, create_time, comment, status,publish, delete_flag)
 VALUES (
            '心',
            '蓦然回首，那人却在灯火阑珊处',
@@ -38,8 +36,6 @@ VALUES (
            true,
             false,
             true,
-            '杂文',
-            '诗',
             false
        )
 # 如果一个已经执行过的脚本被修改过，那么flyway在进行哈希校验的时候发现文件不匹配而报错
