@@ -1,5 +1,6 @@
 package com.smallclover.nullpointerexception.service.comment;
 
+import com.smallclover.nullpointerexception.dto.CommentDTO;
 import com.smallclover.nullpointerexception.model.Comment;
 
 import java.util.List;
@@ -23,4 +24,6 @@ import java.util.List;
      boolean insertComment(Comment comment);
     
      Comment getCommentByCommentId(long commentId);
+
+    List<CommentDTO> getArticleCommentsByArticleId(long articleId);
 }

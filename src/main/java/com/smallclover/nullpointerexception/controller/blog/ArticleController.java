@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.smallclover.nullpointerexception.constant.ResponseStatusCode;
 import com.smallclover.nullpointerexception.dto.ApiResponse;
 import com.smallclover.nullpointerexception.dto.CommentDTO;
+import com.smallclover.nullpointerexception.exception.ArticleException;
 import com.smallclover.nullpointerexception.model.Article;
 import com.smallclover.nullpointerexception.model.Comment;
 import com.smallclover.nullpointerexception.service.article.ArticleService;
@@ -23,6 +24,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -46,36 +48,27 @@ public class ArticleController{
     //TODO 缓存的引入
     //TODO 标签数据结构修改
 
-
     /**
      * 显示指定Id文章
-     * @param id
+     * @param articleId
      * @return
      */
     @GetMapping("/detail/{id}")
-    public ModelAndView articleDetail(@PathVariable("id") long id){
-        var mv = new ModelAndView();
-        Article article = articleService.getArticleById(id);
+    public ModelAndView articleDetail(@PathVariable("id") long articleId){
+
+        Article article = articleService.getArticleById(articleId);
+
+        if (Objects.isNull(article)){
+            throw new ArticleException("文章不存在");
+        }
 
         if (!article.isPublish()){
-            mv.setViewName("/blog/common/article_forbid_access");
-            return mv;
+            throw new ArticleException("该文章没有访问权限");
         }
+        var commentDTOList = commentService.getArticleCommentsByArticleId(articleId);
+        var mv = new ModelAndView();
 
         mv.addObject("article",article);
-
-        List<CommentDTO> commentDTOList = new ArrayList<>();
-        List<Comment> comments = commentService.getTopComment(id);
-
-        for (Comment comment: comments){
-            CommentDTO commentDTO = new CommentDTO();
-            BeanUtils.copyProperties(comment, commentDTO);
-            var childCommentList = commentService.getTopChildComment(id, comment.getUserId());
-
-            commentDTO.setChildComments(childCommentList);
-            commentDTOList.add(commentDTO);
-        }
-
         mv.addObject("comments", commentDTOList);
         mv.setViewName("/blog/article_detail");
         return mv;
@@ -101,6 +94,11 @@ public class ArticleController{
         return mv;
     }
 
+    /**
+     * 提交评论
+     * @param commentDTO
+     * @return
+     */
     @PostMapping("/comment")
     public ApiResponse commentPost(@Valid @RequestBody CommentDTO commentDTO){
 

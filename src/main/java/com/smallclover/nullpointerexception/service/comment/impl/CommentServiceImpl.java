@@ -1,10 +1,13 @@
 package com.smallclover.nullpointerexception.service.comment.impl;
 
+import com.smallclover.nullpointerexception.dto.CommentDTO;
 import com.smallclover.nullpointerexception.mapper.CommentMapper;
 import com.smallclover.nullpointerexception.model.Comment;
 import com.smallclover.nullpointerexception.service.comment.CommentService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -57,6 +60,22 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public Comment getCommentByCommentId(long commentId) {
         return commentMapper.getCommentByCommentId(commentId);
+    }
+
+    @Override
+    public List<CommentDTO> getArticleCommentsByArticleId(long articleId) {
+        List<CommentDTO> commentDTOList = new ArrayList<>();
+        List<Comment> comments = getTopComment(articleId);
+
+        for (Comment comment: comments){
+            CommentDTO commentDTO = new CommentDTO();
+            BeanUtils.copyProperties(comment, commentDTO);
+            var childCommentList = getTopChildComment(articleId, comment.getUserId());
+
+            commentDTO.setChildComments(childCommentList);
+            commentDTOList.add(commentDTO);
+        }
+        return commentDTOList;
     }
 
 }

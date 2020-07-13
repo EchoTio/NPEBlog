@@ -5,7 +5,7 @@ package com.smallclover.nullpointerexception.exception;
  * @Author: Amadeus
  * @Date: 2020/5/10 17:57
  */
-public class FileException extends RuntimeException {
+public class FileException extends BaseException {
 
     public FileException(String message) {
         super(message);

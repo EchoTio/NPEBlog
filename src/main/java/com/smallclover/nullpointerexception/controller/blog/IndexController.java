@@ -5,6 +5,7 @@ import com.smallclover.nullpointerexception.service.journey.JourneyService;
 import com.smallclover.nullpointerexception.util.TimeUtils;
 import com.smallclover.nullpointerexception.dto.DevelopLogDTO;
 import com.smallclover.nullpointerexception.service.developLog.DevelopLogService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,16 +23,13 @@ import java.util.stream.Collectors;
  */
 @Controller("homeController")
 @RequestMapping("/")
+@AllArgsConstructor
 public class IndexController {
 
     private DevelopLogService siteLogService;
 
     private JourneyService journeyService;
 
-    public IndexController(DevelopLogService siteLogService, JourneyService journeyService) {
-        this.siteLogService = siteLogService;
-        this.journeyService = journeyService;
-    }
 
     /**
      * 跳转到首页
