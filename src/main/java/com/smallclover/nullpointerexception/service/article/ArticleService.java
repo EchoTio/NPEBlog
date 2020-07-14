@@ -39,7 +39,7 @@ public interface ArticleService {
      * 根据入力Id删除文章
      * @return
      */
-    long deleteArticleById(long articleId);
+    boolean deleteArticleById(long articleId);
 
     boolean insertArticle(Article article);
 

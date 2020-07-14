@@ -196,23 +196,32 @@
                         articleId: articleId,
                     },
                     type: "POST",
-                    dataType: "text",
+                    dataType: "json",
                     success: function(data) {
-                        console.log("success");
-                        Swal.fire(
-                            "文章:" + "[" + articleTitle + "]" + '被删除!',
-                            '文件已经删除成功',
-                            'success'
-                        )
+                        console.log(data);
+                        if (data.code !== 200){
+                            console.log("error");
+                            Swal.fire(
+                                "文章:" + "[" + articleTitle + "]" + '删除失败!',
+                                '文件删除失败',
+                                'error'
+                            )
+                        }else{
+                            Swal.fire(
+                                "文章:" + "[" + articleTitle + "]" + '被删除!',
+                                '文件已经删除成功',
+                                'success'
+                            )
+                        }
                     },
-                    error: function (data) {
-                        console.log("error");
-                        Swal.fire(
-                            "文章:" + "[" + articleTitle + "]" + '删除失败!',
-                            '文件删除失败',
-                            'error'
-                        )
-                    }
+                    // error: function (data) {
+                    //     console.log("error");
+                    //     Swal.fire(
+                    //         "文章:" + "[" + articleTitle + "]" + '删除失败!',
+                    //         '文件删除失败',
+                    //         'error'
+                    //     )
+                    // }
                 });
             }
         })

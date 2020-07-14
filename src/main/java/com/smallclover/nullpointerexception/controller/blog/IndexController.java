@@ -28,8 +28,6 @@ public class IndexController {
 
     private DevelopLogService siteLogService;
 
-    private JourneyService journeyService;
-
 
     /**
      * 跳转到首页
@@ -78,26 +76,5 @@ public class IndexController {
         }).collect(Collectors.toList());
         model.addAttribute("developLogs", developLogDTOS);
         return "/blog/develop_log";
-    }
-
-    /**
-     * 旅行日志首页
-     * @return
-     */
-    @GetMapping("/blog/journey")
-    public String journey(Model model){
-        var journeys = journeyService.getAllJourneys();
-        model.addAttribute("center", journeys.get(0));
-        return "/blog/journey";
-    }
-
-    /**
-     * 获取所有旅行记录
-     * @return
-     */
-    @GetMapping("/blog/journey/all")
-    public @ResponseBody List<Journey> getAllJourney(){
-        var journeys = journeyService.getAllJourneys();
-        return journeys;
     }
 }

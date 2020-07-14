@@ -2,7 +2,7 @@ package com.smallclover.nullpointerexception.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.smallclover.nullpointerexception.constant.ResponseStatusCode;
-import com.smallclover.nullpointerexception.dto.ApiResponse;
+import com.smallclover.nullpointerexception.api.rep.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.BadCredentialsException;

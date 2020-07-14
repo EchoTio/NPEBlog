@@ -1,8 +1,10 @@
-package com.smallclover.nullpointerexception.dto;
+package com.smallclover.nullpointerexception.api.rep;
 
 
 import com.smallclover.nullpointerexception.constant.ResponseStatusCode;
 import lombok.Data;
+
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * api响应结果
@@ -24,6 +26,13 @@ public class ApiResponse<T> {
      * 响应数据(T指定类型的数据)
      */
     private T data;
+
+    public static ApiResponse fail(ResponseStatusCode responseStatusCode){
+        return new ApiResponse(responseStatusCode.getCode(), responseStatusCode.getDesc(), null);
+    }
+    public static <T> ApiResponse fail(ResponseStatusCode responseStatusCode, T data){
+        return new ApiResponse(responseStatusCode.getCode(), responseStatusCode.getDesc(), data);
+    }
 
     public static <T> ApiResponse fail(int code, String message, T data){
         // HttpStatus

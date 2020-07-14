@@ -82,8 +82,8 @@ public class ArticleServiceImpl implements ArticleService {
             @CacheEvict(cacheNames = "articles", allEntries = true)
     })
     @Override
-    public long deleteArticleById(long articleId) {
-        return articleMapper.deleteArticleById(articleId,true );
+    public boolean deleteArticleById(long articleId) {
+        return articleMapper.deleteArticleById(articleId, true) > 0;
     }
 
 //    @CacheEvict(cacheNames = "articles", allEntries = true)

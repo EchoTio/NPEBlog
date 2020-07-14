@@ -1,12 +1,10 @@
 package com.smallclover.nullpointerexception.controller.common;
 
 import com.smallclover.nullpointerexception.constant.ResponseStatusCode;
-import com.smallclover.nullpointerexception.dto.ApiResponse;
+import com.smallclover.nullpointerexception.api.rep.ApiResponse;
 import org.springframework.boot.web.servlet.error.ErrorController;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 

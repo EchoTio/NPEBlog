@@ -1,6 +1,6 @@
 package com.smallclover.nullpointerexception.controller.common;
 
-import com.smallclover.nullpointerexception.dto.ApiResponse;
+import com.smallclover.nullpointerexception.api.rep.ApiResponse;
 import com.smallclover.nullpointerexception.exception.ArticleException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

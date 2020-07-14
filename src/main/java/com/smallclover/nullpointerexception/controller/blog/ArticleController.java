@@ -3,7 +3,7 @@ package com.smallclover.nullpointerexception.controller.blog;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.smallclover.nullpointerexception.constant.ResponseStatusCode;
-import com.smallclover.nullpointerexception.dto.ApiResponse;
+import com.smallclover.nullpointerexception.api.rep.ApiResponse;
 import com.smallclover.nullpointerexception.dto.CommentDTO;
 import com.smallclover.nullpointerexception.exception.ArticleException;
 import com.smallclover.nullpointerexception.model.Article;
@@ -14,16 +14,12 @@ import com.smallclover.nullpointerexception.service.mail.MailService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -117,8 +113,7 @@ public class ArticleController{
             if (result){
                 return ApiResponse.ok();
             }
-            return ApiResponse.fail(ResponseStatusCode.INTERNAL_SERVER_ERROR.getCode(),
-                    ResponseStatusCode.INTERNAL_SERVER_ERROR.getDesc());
+            return ApiResponse.fail(ResponseStatusCode.INTERNAL_SERVER_ERROR);
     }
 
 }
