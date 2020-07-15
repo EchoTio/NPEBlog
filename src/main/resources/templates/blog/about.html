@@ -28,33 +28,27 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <ul>
-            <li>描述:一个喜欢瞎搞的魔法师</li>
+            <li>[[${about.desc}]]</li>
             <li>
               技术栈:
-              <ul>
-                <li>语言: Java(主力), Python</li>
-                <li>框架: SpringBoot, MyBaits</li>
-                <li>前端模板引擎: Thymeleaf</li>
-                <li>数据库: MySQL, PostgreSQL</li>
-                <li>版本控制工具: Git, SVN</li>
-                <li>自动构建工具: Gradle, Maven</li>
-                <li>数据迁移工具: Flyway</li>
+              <ul th:each="tech: ${about.techStack}">
+                <li>[[${tech}]]</li>
               </ul>
             </li>
             <li>
-              现居地: 日本, 东京
+              [[${about.address}]]
             </li>
             <li>
-              喜欢的事物: 动漫, 编程, 篮球, 读书, 游戏, 历史古迹
+              [[${about.favourite}]]
             </li>
             <li>
-              性格: 热情, 温和, 冲动, 谨慎, 心理活动复杂
+              [[${about.character}]]
             </li>
             <li>
-              期待: 拥有属于自己的书房
+              [[${about.future}]]
             </li>
             <li>
-              座右铭: 谨言慎行
+             [[${about.wellKnown}]]
             </li>
           </ul>
         </div>

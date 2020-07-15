@@ -26,16 +26,14 @@
             <h6 class="f12">时间线</h6>
             <h5 class="f24">发展历程</h5>
         </div>
-        <th:block th:each="develop: ${developLogs}">
-            <ul class="clearfix-time">
-                <li th:each="record: ${develop.content}">
-                    <h4 class="f30">[[${develop.createTime}]]</h4>
-                    <span class="span">[[${develop.timeAgo}]]</span>
-                    <p class="f14">[[${record}]]</p>
-                    <p class="f14">[[${develop.author}]]</p>
-                </li>
-            </ul>
-        </th:block>
+        <ul class="clearfix-time" th:each="develop: ${developLogs}">
+            <li th:each="record: ${develop.content}">
+                <h4 class="f30">[[${develop.createTime}]]</h4>
+                <span class="span">[[${develop.timeAgo}]]</span>
+                <p class="f14">[[${record}]]</p>
+                <p class="f14">[[${develop.author}]]</p>
+            </li>
+        </ul>
         <div class="future">未来</div>
     </div>
 </div>
