@@ -50,71 +50,71 @@ www.nullpointerexception.cf
 
 ##### 首页
 
-![首页](doc\img\blog\home.png)
+![首页](\doc\img\blog\home.png)
 
 ##### 文章列表
 
-![文章列表](doc\img\blog\articles.png)
+![文章列表](\doc\img\blog\articles.png)
 
 ##### 归档
 
-![归档](doc\img\blog\archive.png)
+![归档](\doc\img\blog\archive.png)
 
 ##### 标签云
 
-![标签云](doc\img\blog\tag-cloud.png)
+![标签云](\doc\img\blog\tag-cloud.png)
 
 ##### 关于
 
-![关于](doc\img\blog\about.png)
+![关于](\doc\img\blog\about.png)
 
 ##### 旅行
 
-![旅行](doc\img\blog\travel.png)
+![旅行](\doc\img\blog\travel.png)
 
 ##### 日志
 
-![日志](doc\img\blog\log.png)
+![日志](\doc\img\blog\log.png)
 
 #### 管理
 
 ##### 首页
 
-![首页](doc\img\admin\home.png)
+![首页](\doc\img\admin\home.png)
 
 ##### 发布文章
 
-![发布文章](doc\img\admin\publish-article.png)
+![发布文章](\doc\img\admin\publish-article.png)
 
 ##### 文章管理
 
-![文章管理](doc\img\admin\article-manager.png)
+![文章管理](\doc\img\admin\article-manager.png)
 
 ##### 标签分类管理
 
-![标签分类管理](doc\img\admin\tag-category-manager.png)
+![标签分类管理](\doc\img\admin\tag-category-manager.png)
 
 ##### 评论管理
 
-![评论管理](doc\img\admin\comment-manager.png)
+![评论管理](\doc\img\admin\comment-manager.png)
 
 ##### 开发日志管理
 
-![开发日志管理](doc\img\admin\develop-log.png)
+![开发日志管理](\doc\img\admin\develop-log.png)
 
 ##### 添加开发日志
 
-![添加开发日志](doc\img\admin\add-develop-log.png)
+![添加开发日志](\doc\img\admin\add-develop-log.png)
 
 ##### 日历
 
-![日历](doc\img\admin\calendar.png)
+![日历](\doc\img\admin\calendar.png)
 
 ##### 附件管理
 
-![附件管理](doc\img\admin\attach.png)
+![附件管理](\doc\img\admin\attach.png)
 
 ##### 系统设置
 
-![系统设置](doc\img\admin\setting.png)
+![系统设置](\doc\img\admin\setting.png)
 
