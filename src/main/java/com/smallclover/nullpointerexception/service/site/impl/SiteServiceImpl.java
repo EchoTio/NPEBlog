@@ -1,6 +1,6 @@
 package com.smallclover.nullpointerexception.service.site.impl;
 
-import com.smallclover.nullpointerexception.dto.StatisticDTO;
+import com.smallclover.nullpointerexception.dto.StatisticDto;
 import com.smallclover.nullpointerexception.mapper.ArticleMapper;
 import com.smallclover.nullpointerexception.mapper.AttachMapper;
 import com.smallclover.nullpointerexception.mapper.CommentMapper;
@@ -34,14 +34,14 @@ public class SiteServiceImpl implements SiteService {
      * @return
      */
     @Override
-    public StatisticDTO getStatistics() {
+    public StatisticDto getStatistics() {
     //TODO 启用缓存，但不是redis，而是caffeine
         // 已发表的文章总数
         long articles = articleMapper.getArticleCount();
         long comments = commentMapper.getCommentCount();
         long attaches = attachMapper.getAttachCount();
         long developLogs = developLogMapper.getDevelopLogCount();
-        var statisticDTO = new StatisticDTO();
+        var statisticDTO = new StatisticDto();
         statisticDTO.setArticles(articles);
         statisticDTO.setComments(comments);
         statisticDTO.setAttaches(attaches);

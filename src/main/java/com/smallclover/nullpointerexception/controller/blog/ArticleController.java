@@ -4,7 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.smallclover.nullpointerexception.constant.ResponseStatusCode;
 import com.smallclover.nullpointerexception.api.rep.ApiResponse;
-import com.smallclover.nullpointerexception.dto.CommentDTO;
+import com.smallclover.nullpointerexception.dto.CommentDto;
 import com.smallclover.nullpointerexception.exception.ArticleException;
 import com.smallclover.nullpointerexception.model.Article;
 import com.smallclover.nullpointerexception.model.Comment;
@@ -96,7 +96,7 @@ public class ArticleController{
      * @return
      */
     @PostMapping("/comment")
-    public ApiResponse commentPost(@Valid @RequestBody CommentDTO commentDTO){
+    public ApiResponse commentPost(@Valid @RequestBody CommentDto commentDTO){
 
             var comment = new Comment();
             BeanUtils.copyProperties(commentDTO, comment);

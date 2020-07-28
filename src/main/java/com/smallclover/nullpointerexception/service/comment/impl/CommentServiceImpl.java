@@ -1,6 +1,6 @@
 package com.smallclover.nullpointerexception.service.comment.impl;
 
-import com.smallclover.nullpointerexception.dto.CommentDTO;
+import com.smallclover.nullpointerexception.dto.CommentDto;
 import com.smallclover.nullpointerexception.mapper.CommentMapper;
 import com.smallclover.nullpointerexception.model.Comment;
 import com.smallclover.nullpointerexception.service.comment.CommentService;
@@ -63,12 +63,12 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<CommentDTO> getArticleCommentsByArticleId(long articleId) {
-        List<CommentDTO> commentDTOList = new ArrayList<>();
+    public List<CommentDto> getArticleCommentsByArticleId(long articleId) {
+        List<CommentDto> commentDTOList = new ArrayList<>();
         List<Comment> comments = getTopComment(articleId);
 
         for (Comment comment: comments){
-            CommentDTO commentDTO = new CommentDTO();
+            CommentDto commentDTO = new CommentDto();
             BeanUtils.copyProperties(comment, commentDTO);
             var childCommentList = getTopChildComment(articleId, comment.getUserId());
 

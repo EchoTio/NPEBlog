@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TagDTO {
+public class TagDto {
     // 标签名
     private String word;
     // 该标签的数量

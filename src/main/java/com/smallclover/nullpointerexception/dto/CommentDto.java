@@ -15,7 +15,7 @@ import java.util.List;
  * @Date: 2020/5/21 18:39
  */
 @Data
-public class CommentDTO implements Serializable {
+public class CommentDto implements Serializable {
     // 主键
     private long id;
     // 评论内容

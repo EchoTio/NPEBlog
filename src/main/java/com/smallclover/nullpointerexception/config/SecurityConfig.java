@@ -111,7 +111,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/")
                 .antMatchers("/index")
                 .antMatchers("/blog/**")
-                .antMatchers("/api/**");
+                .antMatchers("/api/**")
+                // 测试用
+                .antMatchers("/test/**");
     }
 
     @Override

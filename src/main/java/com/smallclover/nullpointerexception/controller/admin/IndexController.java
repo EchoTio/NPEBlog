@@ -1,13 +1,10 @@
 package com.smallclover.nullpointerexception.controller.admin;
 
-import com.smallclover.nullpointerexception.dto.StatisticDTO;
-import com.smallclover.nullpointerexception.service.article.ArticleService;
+import com.smallclover.nullpointerexception.dto.StatisticDto;
 import com.smallclover.nullpointerexception.service.site.SiteService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -31,7 +28,7 @@ public class IndexController {
 
     @RequestMapping(value = {"", "/index"})
     public String index(HttpServletRequest request){
-        StatisticDTO statisticDTO = siteService.getStatistics();
+        StatisticDto statisticDTO = siteService.getStatistics();
         request.setAttribute("statistics", statisticDTO);
         return "/admin/index";
     }

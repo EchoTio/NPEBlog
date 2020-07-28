@@ -1,19 +1,15 @@
 package com.smallclover.nullpointerexception.service.tag.impl;
 
-import com.smallclover.nullpointerexception.dto.ArticleDTO;
 import com.smallclover.nullpointerexception.mapper.ArticleMapper;
 import com.smallclover.nullpointerexception.mapper.TagArticleMapper;
 import com.smallclover.nullpointerexception.mapper.TagMapper;
 import com.smallclover.nullpointerexception.model.Article;
 import com.smallclover.nullpointerexception.model.ArticleTagCategory;
 import com.smallclover.nullpointerexception.model.Tag;
-import com.smallclover.nullpointerexception.model.TagArticle;
 import com.smallclover.nullpointerexception.service.tag.TagService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

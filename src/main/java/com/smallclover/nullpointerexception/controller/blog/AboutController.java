@@ -1,6 +1,6 @@
 package com.smallclover.nullpointerexception.controller.blog;
 
-import com.smallclover.nullpointerexception.dto.AboutDTO;
+import com.smallclover.nullpointerexception.dto.AboutDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,7 +38,7 @@ public class AboutController {
         var character = " 性格: 热情, 温和, 冲动, 谨慎, 心理活动复杂";
         var future = "期待: 拥有属于自己的书房";
         var wellKnown = "座右铭: 谨言慎行";
-        var aboutDTO = new AboutDTO();
+        var aboutDTO = new AboutDto();
         aboutDTO.setTechStack(techStack);
         aboutDTO.setDesc(desc);
         aboutDTO.setAddress(address);

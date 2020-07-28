@@ -11,7 +11,7 @@ import java.util.List;
  * @date 2020-01-19
  */
 @Data
-public class DevelopLogDTO {
+public class DevelopLogDto {
 
     // 修复内容
     private List<String> content;

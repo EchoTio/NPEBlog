@@ -1,6 +1,5 @@
 package com.smallclover.nullpointerexception.service.tag;
 
-import com.smallclover.nullpointerexception.dto.ArticleDTO;
 import com.smallclover.nullpointerexception.model.Article;
 import com.smallclover.nullpointerexception.model.Tag;
 

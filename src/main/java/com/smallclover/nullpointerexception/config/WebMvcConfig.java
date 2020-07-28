@@ -2,6 +2,7 @@ package com.smallclover.nullpointerexception.config;
 
 import com.smallclover.nullpointerexception.interceptor.AccessRecordInterceptor;
 import com.smallclover.nullpointerexception.interceptor.BaseInterceptor;
+import com.smallclover.nullpointerexception.interceptor.SiteAccessInterceptor;
 import com.smallclover.nullpointerexception.property.NPEResourcesProperties;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,9 +21,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @AllArgsConstructor
 public class WebMvcConfig implements WebMvcConfigurer {
 
-    private final BaseInterceptor baseInterceptor;
-    private final AccessRecordInterceptor accessRecordInterceptor;
-    private final NPEResourcesProperties NPEResourcesProperties;
+    private BaseInterceptor baseInterceptor;
+    private AccessRecordInterceptor accessRecordInterceptor;
+    private SiteAccessInterceptor siteAccessInterceptor;
+    private NPEResourcesProperties NPEResourcesProperties;
 
 
     @Override
@@ -35,6 +37,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addInterceptor(accessRecordInterceptor)
                 .addPathPatterns("/**")
                 .excludePathPatterns("/static/**");
+
+        registry.addInterceptor(siteAccessInterceptor)
+                .addPathPatterns("/**")
+                .excludePathPatterns("/static/**", "/admin/**");
     }
 
     @Override

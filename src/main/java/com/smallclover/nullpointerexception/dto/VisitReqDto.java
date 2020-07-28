@@ -8,7 +8,7 @@ import lombok.Data;
  * @Date: 2020/6/3 21:18
  */
 @Data
-public class VisitReqDTO {
+public class VisitReqDto {
 
     // 应用区分
     private String app;

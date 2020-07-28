@@ -1,6 +1,6 @@
 package com.smallclover.nullpointerexception.service.article.impl;
 
-import com.smallclover.nullpointerexception.dto.ArticleDTO;
+import com.smallclover.nullpointerexception.dto.ArticleDto;
 import com.smallclover.nullpointerexception.model.Article;
 import com.smallclover.nullpointerexception.mapper.ArticleMapper;
 import com.smallclover.nullpointerexception.service.article.ArticleService;
@@ -35,15 +35,15 @@ public class ArticleServiceImpl implements ArticleService {
      */
 //    @Cacheable(cacheNames = "articles")
     @Override
-    public List<ArticleDTO> getAllArticles() {
+    public List<ArticleDto> getAllArticles() {
         List<Article> articles = articleMapper.getAllArticles();
         List<Long> articleIds = articles.stream().map(Article::getId).collect(Collectors.toList());
         var articleIdAndCategoryMap = tagService.getCategoryByArticleIds(articleIds);
         var articleIdAndTagsMap = tagService.getTagsByArticleIds(articleIds);
 
-        var articleDTOs = new ArrayList<ArticleDTO>();
+        var articleDTOs = new ArrayList<ArticleDto>();
         for(Article article: articles){
-            ArticleDTO articleDTO = new ArticleDTO();
+            ArticleDto articleDTO = new ArticleDto();
             BeanUtils.copyProperties(article, articleDTO);
             articleDTO.setTags(articleIdAndTagsMap.get(article.getId()));
             articleDTO.setCategory(articleIdAndCategoryMap.get(article.getId()));

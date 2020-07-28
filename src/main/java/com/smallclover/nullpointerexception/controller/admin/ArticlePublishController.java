@@ -1,6 +1,6 @@
 package com.smallclover.nullpointerexception.controller.admin;
 
-import com.smallclover.nullpointerexception.dto.ArticleDTO;
+import com.smallclover.nullpointerexception.dto.ArticleDto;
 import com.smallclover.nullpointerexception.model.Article;
 import com.smallclover.nullpointerexception.service.article.ArticleService;
 import com.smallclover.nullpointerexception.service.article.FileService;
@@ -45,7 +45,7 @@ public class ArticlePublishController {
      * @return
      */
     @PostMapping("/add/content")
-    public ResponseEntity addArticle(@Valid @RequestBody ArticleDTO articleDTO){
+    public ResponseEntity addArticle(@Valid @RequestBody ArticleDto articleDTO){
         //TODO tag表也需要插入，这里需要事物
         var article = new Article();
         BeanUtils.copyProperties(articleDTO, article);

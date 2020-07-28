@@ -7,6 +7,6 @@ import lombok.Data;
  * @date 2020-06-20
  */
 @Data
-public class MailDTO {
+public class MailDto {
 
 }

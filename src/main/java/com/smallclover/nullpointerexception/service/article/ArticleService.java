@@ -1,6 +1,6 @@
 package com.smallclover.nullpointerexception.service.article;
 
-import com.smallclover.nullpointerexception.dto.ArticleDTO;
+import com.smallclover.nullpointerexception.dto.ArticleDto;
 import com.smallclover.nullpointerexception.model.Article;
 
 import java.util.List;
@@ -15,7 +15,7 @@ public interface ArticleService {
      * 取得所有文章
      * @return 文章实体类列表
      */
-    List<ArticleDTO> getAllArticles();
+    List<ArticleDto> getAllArticles();
 
     /**
      * 取得所有文章

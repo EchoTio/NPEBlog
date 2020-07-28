@@ -1,25 +1,15 @@
 package com.smallclover.nullpointerexception.interceptor;
 
-import com.smallclover.nullpointerexception.dto.VisitReqDTO;
-import com.smallclover.nullpointerexception.property.NPEResourcesProperties;
-import com.smallclover.nullpointerexception.service.visit.VisitService;
 import com.smallclover.nullpointerexception.util.IPAddressUtils;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * @Author: Amadeus

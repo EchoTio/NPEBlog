@@ -10,9 +10,9 @@ import lombok.Data;
  */
 @Data
 @AllArgsConstructor
-public class SiteVisitDTO {
+public class SiteVisitDto {
     // 站点访问统计
-    private VisitDTO siteDTO;
+    private VisitDto siteDTO;
     // 页面访问统计
-    private VisitDTO uriDTO;
+    private VisitDto uriDTO;
 }

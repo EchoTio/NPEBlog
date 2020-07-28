@@ -10,7 +10,7 @@ import java.util.List;
  * @Date: 2020/7/15 21:33
  */
 @Data
-public class AboutDTO {
+public class AboutDto {
     private List<String> techStack;
     private String desc;
     private String address;

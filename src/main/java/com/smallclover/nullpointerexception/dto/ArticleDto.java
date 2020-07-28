@@ -11,7 +11,7 @@ import java.sql.Timestamp;
  * @date 2020-05-04
  */
 @Data
-public class ArticleDTO {
+public class ArticleDto {
     // id
     private long id;
     // 标题

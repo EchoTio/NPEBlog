@@ -1,6 +1,6 @@
 package com.smallclover.nullpointerexception.controller.blog;
 
-import com.smallclover.nullpointerexception.dto.DevelopLogDTO;
+import com.smallclover.nullpointerexception.dto.DevelopLogDto;
 import com.smallclover.nullpointerexception.service.developLog.DevelopLogService;
 import com.smallclover.nullpointerexception.util.TimeUtils;
 import lombok.AllArgsConstructor;
@@ -34,7 +34,7 @@ public class DevelopLogController {
 
         var developLogDTOS = developLogService.getAllDevelopLogs().stream().map(siteLog -> {
             String timeAgo = TimeUtils.getFewTimeAgo(siteLog.getCreateTime());
-            var developLogDTO = new DevelopLogDTO();
+            var developLogDTO = new DevelopLogDto();
             developLogDTO.setAuthor(siteLog.getAuthor());
             developLogDTO.setCreateTime(siteLog.getCreateTime());
             developLogDTO.setTimeAgo(timeAgo);

@@ -8,7 +8,7 @@ import lombok.Data;
  * 后台统计数据DTO
  */
 @Data
-public class StatisticDTO {
+public class StatisticDto {
 
     // 已经发表的文章总数
     private long articles;

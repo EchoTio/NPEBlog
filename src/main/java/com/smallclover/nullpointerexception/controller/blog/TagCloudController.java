@@ -1,6 +1,6 @@
 package com.smallclover.nullpointerexception.controller.blog;
 
-import com.smallclover.nullpointerexception.dto.TagDTO;
+import com.smallclover.nullpointerexception.dto.TagDto;
 import com.smallclover.nullpointerexception.model.Tag;
 import com.smallclover.nullpointerexception.service.article.ArticleService;
 import com.smallclover.nullpointerexception.service.tag.TagService;
@@ -37,7 +37,7 @@ public class TagCloudController {
      * @return
      */
     @RequestMapping("/json")
-    public ResponseEntity<List<TagDTO>> tagCloud(){
+    public ResponseEntity<List<TagDto>> tagCloud(){
 
         List<String> tagNames = tagService.getAllTags()
                 .stream()
@@ -52,9 +52,9 @@ public class TagCloudController {
             map.put(tag.getTagName(), map.getOrDefault(tag.getTagName(), 0) + 1);
         }
 
-        var tagDTOs = new ArrayList<TagDTO>();
+        var tagDTOs = new ArrayList<TagDto>();
         for (Map.Entry<String, Integer> entry: map.entrySet()){
-            var tagDTO = new TagDTO();
+            var tagDTO = new TagDto();
             tagDTO.setWord(entry.getKey());
             tagDTO.setCount(entry.getValue());
             tagDTOs.add(tagDTO);

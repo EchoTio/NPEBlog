@@ -14,7 +14,7 @@ import java.util.Set;
  */
 @Data
 //@AllArgsConstructor
-public class VisitDTO implements Serializable {
+public class VisitDto implements Serializable {
 //    // pv 该url的总访问次数，每个ip一天次数只+1
 //    private Map<String, String> pv;
 //    // uv 页面总的ip访问数
