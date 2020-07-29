@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * @Author: Amadeus
@@ -12,7 +13,10 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 public class SiteAccessDto {
+    // 访问者ip
     private String ip;
+    // 访问地址
     private String url;
-    private LocalDate date;
+    // 请求时间
+    private LocalDateTime date;
 }

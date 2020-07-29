@@ -17,6 +17,6 @@ public class TestController {
 
     @RequestMapping("")
     public ResponseEntity index(){
-        return ResponseEntity.ok(SimpleCache.simpleCache.get(LocalDate.now()));
+        return null;
     }
 }

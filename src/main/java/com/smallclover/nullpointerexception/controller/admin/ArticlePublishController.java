@@ -50,6 +50,7 @@ public class ArticlePublishController {
         var article = new Article();
         BeanUtils.copyProperties(articleDTO, article);
         articleService.insertArticle(article);
+        // TODO 缓存成功页面没有跳转
         return ResponseEntity.ok().build();
     }
 

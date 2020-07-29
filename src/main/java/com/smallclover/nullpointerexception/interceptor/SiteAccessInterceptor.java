@@ -1,6 +1,5 @@
 package com.smallclover.nullpointerexception.interceptor;
 
-import com.smallclover.nullpointerexception.controller.functiontest.SimpleCache;
 import com.smallclover.nullpointerexception.dto.SiteAccessDto;
 import com.smallclover.nullpointerexception.util.IPAddressUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -9,8 +8,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.time.LocalDate;
-import java.util.Map;
+import java.time.LocalDateTime;
 
 /**
  * @Author: Amadeus
@@ -24,9 +22,8 @@ public class SiteAccessInterceptor implements HandlerInterceptor {
         String ip = IPAddressUtils.getIpAddress(request);
 
         String uri = request.getRequestURI();
-        LocalDate today = LocalDate.now();
+        LocalDateTime today = LocalDateTime.now();
         var siteAccessDto = new SiteAccessDto(ip, uri, today);
-        SimpleCache.simpleCache.put(today, siteAccessDto);
         return true;
     }
 }

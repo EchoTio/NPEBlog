@@ -3,6 +3,8 @@ package com.smallclover.nullpointerexception.mapper;
 import com.smallclover.nullpointerexception.model.Article;
 import com.smallclover.nullpointerexception.model.DevelopLog;
 import org.apache.ibatis.annotations.*;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -33,6 +35,7 @@ public interface ArticleMapper {
         @Result(property = "contentView", column = "content_view"),
         @Result(property = "deleteFlag", column = "delete_flag")
     })
+    @Cacheable(cacheNames = "articles")
     List<Article> getAllArticles();
 
     /**
@@ -50,6 +53,7 @@ public interface ArticleMapper {
      */
     @Select("SELECT * FROM article WHERE id = #{id}")
     @ResultMap("article")// 通过引用Results的id直接使用之前声明过的Results
+    @Cacheable(cacheNames = "article", key = "#id")
     Article getArticleById(@Param("id") long id);
 
     /**
@@ -64,6 +68,7 @@ public interface ArticleMapper {
      * @param article
      * @return
      */
+    @CacheEvict(cacheNames = "articles", allEntries = true)
     long insertArticle(Article article);
 
     @Update("UPDATE article SET delete_flag=#{deleteFlag} WHERE id = #{articleId}")

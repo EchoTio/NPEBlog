@@ -33,7 +33,6 @@ public class ArticleServiceImpl implements ArticleService {
      * 查询所有文章
      * @return 包含所有文章的列表
      */
-//    @Cacheable(cacheNames = "articles")
     @Override
     public List<ArticleDto> getAllArticles() {
         List<Article> articles = articleMapper.getAllArticles();
@@ -62,7 +61,6 @@ public class ArticleServiceImpl implements ArticleService {
      * @param id 文章id
      * @return 文章实体类
      */
-//    @Cacheable(cacheNames = "article", key = "#id")
     @Override
     public Article getArticleById(long id) {
         return articleMapper.getArticleById(id);
@@ -86,7 +84,6 @@ public class ArticleServiceImpl implements ArticleService {
         return articleMapper.deleteArticleById(articleId, true) > 0;
     }
 
-//    @CacheEvict(cacheNames = "articles", allEntries = true)
     @Override
     public boolean insertArticle(Article article) {
         // 浏览量
