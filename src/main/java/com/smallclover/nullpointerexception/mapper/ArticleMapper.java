@@ -18,6 +18,8 @@ import java.util.List;
 @Component//这里不将该mapper标记为bean的话intellij会报错，但实际不会有问题
 public interface ArticleMapper {
 
+    //TODO simplekey替换
+
     /**
      * 查找所有文章
      * @return 返回所有文章列表

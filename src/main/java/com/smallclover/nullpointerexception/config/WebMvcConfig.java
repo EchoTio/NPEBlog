@@ -40,7 +40,16 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
         registry.addInterceptor(siteAccessInterceptor)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/static/**", "/admin/**");
+                .excludePathPatterns("/static/**",
+                        "/admin/**",
+                        "/css/**",
+                        "/js/**",
+                        "/img/**",
+                        "/plugins/**",
+                        "/blog/css/**",
+                        "/blog/js/**",
+                        "/blog/img/**",
+                        "/blog/vendor/**");
     }
 
     @Override

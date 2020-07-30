@@ -1,8 +1,10 @@
 package com.smallclover.nullpointerexception.interceptor;
 
+import com.smallclover.nullpointerexception.controller.functiontest.TestServiceImpl;
 import com.smallclover.nullpointerexception.dto.SiteAccessDto;
 import com.smallclover.nullpointerexception.util.IPAddressUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -17,6 +19,10 @@ import java.time.LocalDateTime;
 @Component
 @Slf4j
 public class SiteAccessInterceptor implements HandlerInterceptor {
+
+    @Autowired
+    private TestServiceImpl testServiceImpl;
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String ip = IPAddressUtils.getIpAddress(request);
@@ -24,6 +30,7 @@ public class SiteAccessInterceptor implements HandlerInterceptor {
         String uri = request.getRequestURI();
         LocalDateTime today = LocalDateTime.now();
         var siteAccessDto = new SiteAccessDto(ip, uri, today);
+        testServiceImpl.addPageView(siteAccessDto);
         return true;
     }
 }

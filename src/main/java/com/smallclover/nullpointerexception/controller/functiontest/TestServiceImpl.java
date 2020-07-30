@@ -8,6 +8,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @Author: Amadeus
@@ -16,15 +17,26 @@ import java.util.List;
 @Service
 public class TestServiceImpl {
 
-    private final RedisTemplate<String, Object> redisTemplate;
-
-    public TestServiceImpl(RedisTemplate<String, Object> redisTemplate) {
-        this.redisTemplate = redisTemplate;
-    }
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
 
 
     public void addPageView(SiteAccessDto siteAccessDto){
-        ListOperations<String, Object> listOp = redisTemplate.opsForList();
-        String key = siteAccessDto.getDate().toLocalDate().toString();
+        HashOperations hashOp = redisTemplate.opsForHash();
+        String date = siteAccessDto.getDate().toLocalDate().toString();
+        String page = siteAccessDto.getUrl();
+        String ip = siteAccessDto.getIp();
+        String key = date + page;
+        if (Objects.isNull(hashOp.get(key, ip))){
+            //
+            hashOp.put(key, ip, 1);
+            // pv
+            hashOp.increment("pv-" + date, page, 1);
+            // uv
+            hashOp.put("uv-" + date, page, 1);
+        }else {
+            // pv
+            hashOp.increment("pv-" + date, page, 1);
+        }
     }
 }
