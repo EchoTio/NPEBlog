@@ -103,77 +103,27 @@
         <!-- Main row -->
         <div class="row">
           <div class="col-md-6">
-            <div class="card">
+            <!-- DONUT CHART -->
+            <div class="card card-danger">
               <div class="card-header">
-                <h3 class="card-title">系统访问日志</h3>
+                <h3 class="card-title">Donut Chart</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
               </div>
-              <!-- /.card-header -->
               <div class="card-body">
-                <table class="table table-bordered">
-                  <thead>
-                  <tr>
-                    <th style="width: 10px">#</th>
-                    <th>Task</th>
-                    <th>Progress</th>
-                    <th style="width: 40px">Label</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr>
-                    <td>1.</td>
-                    <td>Update software</td>
-                    <td>
-                      <div class="progress progress-xs">
-                        <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                      </div>
-                    </td>
-                    <td><span class="badge bg-danger">55%</span></td>
-                  </tr>
-                  <tr>
-                    <td>2.</td>
-                    <td>Clean database</td>
-                    <td>
-                      <div class="progress progress-xs">
-                        <div class="progress-bar bg-warning" style="width: 70%"></div>
-                      </div>
-                    </td>
-                    <td><span class="badge bg-warning">70%</span></td>
-                  </tr>
-                  <tr>
-                    <td>3.</td>
-                    <td>Cron job running</td>
-                    <td>
-                      <div class="progress progress-xs progress-striped active">
-                        <div class="progress-bar bg-primary" style="width: 30%"></div>
-                      </div>
-                    </td>
-                    <td><span class="badge bg-primary">30%</span></td>
-                  </tr>
-                  <tr>
-                    <td>4.</td>
-                    <td>Fix and squish bugs</td>
-                    <td>
-                      <div class="progress progress-xs progress-striped active">
-                        <div class="progress-bar bg-success" style="width: 90%"></div>
-                      </div>
-                    </td>
-                    <td><span class="badge bg-success">90%</span></td>
-                  </tr>
-                  </tbody>
-                </table>
+                <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
               </div>
               <!-- /.card-body -->
-              <div class="card-footer clearfix">
-                <ul class="pagination pagination-sm m-0 float-right">
-                  <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                  <li class="page-item"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item"><a class="page-link" href="#">2</a></li>
-                  <li class="page-item"><a class="page-link" href="#">3</a></li>
-                  <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-                </ul>
-              </div>
             </div>
             <!-- /.card -->
+
           </div>
           <!-- /.col -->
           <div class="col-md-6">
@@ -274,4 +224,28 @@
 <!--/* replace的引用目录必须从根目录开始 */-->
 </th:block>
 </body>
+<script type="application/javascript" th:inline="javascript">
+  var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
+  var donutData        = {
+    labels: /*[[${browser.labels}]]*/ [],
+    datasets: [
+      {
+        data: /*[[${browser.dataSet.data}]]*/ [],
+        backgroundColor : /*[[${browser.dataSet.backgroundColor}]]*/ [],
+      }
+    ]
+  }
+  var donutOptions     = {
+    maintainAspectRatio : false,
+    responsive : true,
+  }
+  //Create pie or douhnut chart
+  // You can switch between pie and douhnut using the method below.
+  var donutChart = new Chart(donutChartCanvas, {
+    type: 'doughnut',
+    data: donutData,
+    options: donutOptions
+  })
+
+</script>
 </html>

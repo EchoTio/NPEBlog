@@ -1,5 +1,8 @@
 package com.smallclover.nullpointerexception.interceptor;
 
+import com.blueconic.browscap.Capabilities;
+import com.blueconic.browscap.UserAgentParser;
+import com.blueconic.browscap.UserAgentService;
 import com.smallclover.nullpointerexception.controller.functiontest.TestServiceImpl;
 import com.smallclover.nullpointerexception.dto.SiteAccessDto;
 import com.smallclover.nullpointerexception.util.IPAddressUtils;
@@ -25,6 +28,7 @@ public class SiteAccessInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+
         String ip = IPAddressUtils.getIpAddress(request);
 
         String uri = request.getRequestURI();

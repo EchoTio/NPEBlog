@@ -1,5 +1,8 @@
 package com.smallclover.nullpointerexception.interceptor;
 
+import com.blueconic.browscap.Capabilities;
+import com.blueconic.browscap.UserAgentParser;
+import com.blueconic.browscap.UserAgentService;
 import com.smallclover.nullpointerexception.service.visit.VisitService;
 import com.smallclover.nullpointerexception.util.IPAddressUtils;
 import lombok.AllArgsConstructor;
@@ -23,7 +26,6 @@ import java.util.Map;
 public class AccessRecordInterceptor implements HandlerInterceptor {
     public static final String URL_ATTRIBUTE = HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE;
     private VisitService visitService;
-
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String ip = IPAddressUtils.getIpAddress(request);

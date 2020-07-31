@@ -1,5 +1,7 @@
 package com.smallclover.nullpointerexception.controller.admin;
 
+import com.smallclover.nullpointerexception.dto.BrowserDto;
+import com.smallclover.nullpointerexception.dto.DataSet;
 import com.smallclover.nullpointerexception.dto.StatisticDto;
 import com.smallclover.nullpointerexception.service.site.SiteService;
 import lombok.AllArgsConstructor;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 
 /**
  * @author Amadeus
@@ -30,6 +33,19 @@ public class IndexController {
     public String index(HttpServletRequest request){
         StatisticDto statisticDTO = siteService.getStatistics();
         request.setAttribute("statistics", statisticDTO);
+        var browserDto = new BrowserDto();
+        browserDto.setLabels(Arrays.asList(
+                "Chrome",
+                "IE",
+                "FireFox",
+                "Safari",
+                "Opera",
+                "Navigator"));
+        DataSet dataSet = new DataSet();
+        dataSet.setBackgroundColor(Arrays.asList("#f56954", "#00a65a", "#f39c12", "#00c0ef", "#3c8dbc", "#d2d6de"));
+        dataSet.setData(Arrays.asList(700,500,400,600,300,100));
+        browserDto.setDataSet(dataSet);
+        request.setAttribute("browser", browserDto);
         return "/admin/index";
     }
 
