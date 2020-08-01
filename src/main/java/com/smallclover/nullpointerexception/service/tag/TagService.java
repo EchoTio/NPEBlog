@@ -1,5 +1,6 @@
 package com.smallclover.nullpointerexception.service.tag;
 
+import com.smallclover.nullpointerexception.dto.TagDto;
 import com.smallclover.nullpointerexception.model.Article;
 import com.smallclover.nullpointerexception.model.Tag;
 
@@ -17,4 +18,5 @@ public interface TagService {
     List<Tag> getTagsByTagNames(List<String> tagNames);
     Map<Long, String> getTagsByArticleIds(List<Long> articleIds);
     Map<Long, String> getCategoryByArticleIds(List<Long> articleIds);
+    boolean insertTags(String tags);
 }

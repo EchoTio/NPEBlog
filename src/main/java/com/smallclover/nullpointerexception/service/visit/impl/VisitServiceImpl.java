@@ -1,9 +1,11 @@
 package com.smallclover.nullpointerexception.service.visit.impl;
 
+import com.smallclover.nullpointerexception.dto.SiteAccessDto;
 import com.smallclover.nullpointerexception.service.visit.VisitService;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -18,44 +20,29 @@ import java.util.*;
 @Service
 public class VisitServiceImpl implements VisitService {
 
-    @Autowired
-    private RedisTemplate<String, Object> redisTemplate;
-    // 如果直接使用Lombok会报错无法注入
-    // @AllArgsConstructor注解会尝试注入该字段。
-    private String articleCntKey;
+    private final RedisTemplate<String, Object> redisTemplate;
 
-    public void addIpAccessRecordForArticle(String ip, String id){
-        redisTemplate.opsForHash().put(getDate(), ip+"_"+id, id);
+    public VisitServiceImpl(RedisTemplate<String, Object> redisTemplate) {
+        this.redisTemplate = redisTemplate;
     }
 
-    public void addArticleAccessRecord(String id){
-        redisTemplate.opsForHash().increment(articleCntKey, id, 1);
-    }
-
-    public boolean isVisitToday(String ip, String id){
-        String articleId = (String) redisTemplate.opsForHash().get(getDate(), ip +"_" + id);
-        if (StringUtils.isEmpty(articleId)){
-            return false;
+    @Override
+    public void addVisitRecord(SiteAccessDto siteAccessDto) {
+        HashOperations hashOp = redisTemplate.opsForHash();
+        String date = siteAccessDto.getDate().toLocalDate().toString();
+        String page = siteAccessDto.getUrl();
+        String ip = siteAccessDto.getIp();
+        String key = date + page;
+        if (Objects.isNull(hashOp.get(key, ip))){
+            // 每个页面是否被指定的ip访问过
+            hashOp.put(key, ip, 1);
+            // pv
+            hashOp.increment("pv-" + date, page, 1);
+            // uv
+            hashOp.put("uv-" + date, page, 1);
+        }else {
+            // pv
+            hashOp.increment("pv-" + date, page, 1);
         }
-        return true;
-    }
-
-    private String getDate(){
-        return LocalDate.now().toString();
-    }
-
-    public Map<Object, Object> getIpAccessRecordForArticleAll(){
-        Map<Object, Object> records = redisTemplate.opsForHash().entries(getDate());
-        return records;
-    }
-
-    public Map<Object, Object> getArticleAccessRecord(){
-        Map<Object, Object> records = redisTemplate.opsForHash().entries(articleCntKey);
-        return records;
-    }
-
-    public VisitService build(String appName){
-        articleCntKey = "article_cnt_" +appName;
-        return this;
     }
 }

@@ -1,5 +1,6 @@
 package com.smallclover.nullpointerexception.service.tag.impl;
 
+import com.smallclover.nullpointerexception.dto.TagDto;
 import com.smallclover.nullpointerexception.mapper.ArticleMapper;
 import com.smallclover.nullpointerexception.mapper.TagArticleMapper;
 import com.smallclover.nullpointerexception.mapper.TagMapper;
@@ -9,7 +10,10 @@ import com.smallclover.nullpointerexception.model.Tag;
 import com.smallclover.nullpointerexception.service.tag.TagService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,6 +71,22 @@ public class TagServiceImpl implements TagService {
             articleIdAndCategoryMap.put(atc.getArticleId(), atc.getCategoryName());
         }
         return articleIdAndCategoryMap;
+    }
+
+    @Override
+    public boolean insertTags(String tags) {
+        String[] tagNames = StringUtils.split(tags, " ");
+        var tagList = new ArrayList<Tag>();
+        for (String tagName: tagNames){
+            var tag = new Tag();
+            tag.setTagName(tagName);
+            tag.setCreateTime(LocalDateTime.now());
+            tag.setUpdateTime(LocalDateTime.now());
+            tag.setDeleteFlag(false);
+            tagList.add(tag);
+        }
+        long count = tagMapper.insertTags(tagList);
+        return count >= 0;
     }
 
 }

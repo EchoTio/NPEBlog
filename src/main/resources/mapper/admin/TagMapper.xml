@@ -48,4 +48,12 @@
             #{articleId}
         </foreach>
     </select>
+
+    <insert id="insertTags">
+        INSERT INTO tag (tag_name, update_time, create_time, delete_flag)
+        VALUES
+        <foreach collection="list" item="tag" separator=",">
+            (#{tag.tagName}, #{tag.updateTime}, #{createTime}, #{deleteFlag})
+        </foreach>
+    </insert>
 </mapper>

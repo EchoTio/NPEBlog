@@ -4,10 +4,13 @@ import com.smallclover.nullpointerexception.dto.ArticleDto;
 import com.smallclover.nullpointerexception.model.Article;
 import com.smallclover.nullpointerexception.service.article.ArticleService;
 import com.smallclover.nullpointerexception.service.article.FileService;
+import com.smallclover.nullpointerexception.service.category.CategoryService;
+import com.smallclover.nullpointerexception.service.tag.TagService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -26,8 +29,10 @@ import java.util.Map;
 @AllArgsConstructor
 public class ArticlePublishController {
 
-    private final ArticleService articleService;
-    private final FileService fileService;
+    private ArticleService articleService;
+    private FileService fileService;
+    private TagService tagService;
+    private CategoryService categoryService;
 
     public static final String ARTICLE_IMG_URL = "/upload/article/img/";
 
@@ -46,8 +51,12 @@ public class ArticlePublishController {
      */
     @PostMapping("/add/content")
     public ResponseEntity addArticle(@Valid @RequestBody ArticleDto articleDTO){
-        //TODO tag表也需要插入，这里需要事物
+        //TODO 事务
         var article = new Article();
+        tagService.insertTags(articleDTO.getTags());
+
+        String category = articleDTO.getCategory();
+        categoryService.insertCategory(category);
         BeanUtils.copyProperties(articleDTO, article);
         articleService.insertArticle(article);
         // TODO 缓存成功页面没有跳转

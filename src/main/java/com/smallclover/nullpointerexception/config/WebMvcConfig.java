@@ -2,7 +2,6 @@ package com.smallclover.nullpointerexception.config;
 
 import com.smallclover.nullpointerexception.interceptor.AccessRecordInterceptor;
 import com.smallclover.nullpointerexception.interceptor.BaseInterceptor;
-import com.smallclover.nullpointerexception.interceptor.SiteAccessInterceptor;
 import com.smallclover.nullpointerexception.property.NPEResourcesProperties;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -23,9 +23,6 @@ public class BaseInterceptor implements HandlerInterceptor {
     // logback 具体的日志实现，与之同一个级别的，比如log4j
     // slf4j 日志的抽象框架，为不同的日志实现提供统一的抽象方法
 
-//    private NPEResourcesProperties npeResourcesProperties;
-//    private VisitService visitService;
-
     private static final String USER_AGENT = "User-Agent";
 
     @Override
@@ -37,12 +34,6 @@ public class BaseInterceptor implements HandlerInterceptor {
 
         String userAgent = request.getHeader(USER_AGENT);
         String address = IPAddressUtils.getIpAddress(request);
-
-//        VisitReqDTO reqDTO = new VisitReqDTO();
-//        reqDTO.setApp("blog");
-//        reqDTO.setIp(address);
-//        reqDTO.setUri(url.toString());
-//        visitService.addVisit(reqDTO);
 
         // 记录访客日志
         log.info("User-Agent:{}", userAgent);

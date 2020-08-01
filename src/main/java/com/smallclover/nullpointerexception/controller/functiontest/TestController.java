@@ -39,17 +39,17 @@ public class TestController {
 //        Capabilities capabilities = userAgentParser.parse(userAgent);
 //        return ResponseEntity.ok(capabilities);
         var browserDto = new BrowserDto();
-        browserDto.setLabels(Arrays.asList(
-                "Chrome",
-                "IE",
-                "FireFox",
-                "Safari",
-                "Opera",
-                "Navigator"));
-        DataSet dataSet = new DataSet();
-        dataSet.setBackgroundColor(Arrays.asList("#f56954", "#00a65a", "#f39c12", "#00c0ef", "#3c8dbc", "#d2d6de"));
-        dataSet.setData(Arrays.asList(700,500,400,600,300,100));
-        browserDto.setDataSet(dataSet);
+//        browserDto.setLabels(Arrays.asList(
+//                "Chrome",
+//                "IE",
+//                "FireFox",
+//                "Safari",
+//                "Opera",
+//                "Navigator"));
+//        DataSet dataSet = new DataSet();
+//        dataSet.setBackgroundColor(Arrays.asList("#f56954", "#00a65a", "#f39c12", "#00c0ef", "#3c8dbc", "#d2d6de"));
+//        dataSet.setData(Arrays.asList(700,500,400,600,300,100));
+//        browserDto.setDataSet(dataSet);
         return ResponseEntity.ok(browserDto);
     }
 }

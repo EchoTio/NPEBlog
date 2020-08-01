@@ -6,6 +6,7 @@ import com.smallclover.nullpointerexception.service.category.CategoryService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -20,5 +21,16 @@ public class CategoryServiceImpl implements CategoryService {
 
     public List<Category> selectAllCategories(){
         return categoryMapper.selectAllCategories();
+    }
+
+    @Override
+    public boolean insertCategory(String categoryName) {
+        var category = new Category();
+        category.setCategoryName(categoryName);
+        category.setCreateTime(LocalDateTime.now());
+        category.setUpdateTime(LocalDateTime.now());
+        category.setDeleteFlag(false);
+        long count =categoryMapper.insertCategory(category);
+        return count >= 0;
     }
 }

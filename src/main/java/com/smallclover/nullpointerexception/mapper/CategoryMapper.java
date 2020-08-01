@@ -1,10 +1,7 @@
 package com.smallclover.nullpointerexception.mapper;
 
 import com.smallclover.nullpointerexception.model.Category;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -25,4 +22,8 @@ public interface CategoryMapper {
             @Result(property = "deleteFlag", column = "delete_flag")
     })
     List<Category> selectAllCategories();
+
+    @Insert("INSERT INTO category (category_name, update_time, create_time, delete_flag)" +
+            "VALUE(#{categoryName}, #{updateTime}, #{createTime}, #{deleteFlag})")
+    long insertCategory(Category category);
 }
