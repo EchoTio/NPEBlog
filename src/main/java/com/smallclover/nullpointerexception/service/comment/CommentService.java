@@ -21,7 +21,7 @@ import java.util.List;
 
      boolean updateAuditStatus(long commentId);
 
-     boolean insertComment(Comment comment);
+     boolean insertComment(CommentDto commentDto);
     
      Comment getCommentByCommentId(long commentId);
 

@@ -22,7 +22,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     private BaseInterceptor baseInterceptor;
     private AccessRecordInterceptor accessRecordInterceptor;
-    private SiteAccessInterceptor siteAccessInterceptor;
     private NPEResourcesProperties NPEResourcesProperties;
 
 
@@ -34,10 +33,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/static/**");
 
         registry.addInterceptor(accessRecordInterceptor)
-                .addPathPatterns("/**")
-                .excludePathPatterns("/static/**");
-
-        registry.addInterceptor(siteAccessInterceptor)
                 .addPathPatterns("/**")
                 .excludePathPatterns("/static/**",
                         "/admin/**",

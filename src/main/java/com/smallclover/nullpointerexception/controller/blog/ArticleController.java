@@ -42,7 +42,6 @@ public class ArticleController{
 
 
     //TODO 缓存的引入
-    //TODO 标签数据结构修改
 
     /**
      * 显示指定Id文章
@@ -98,17 +97,7 @@ public class ArticleController{
     @PostMapping("/comment")
     public ApiResponse commentPost(@Valid @RequestBody CommentDto commentDTO){
 
-            var comment = new Comment();
-            BeanUtils.copyProperties(commentDTO, comment);
-            comment.setCreateTime(Timestamp.valueOf(LocalDateTime.now()));
-            comment.setDeleteFlag(false);
-            comment.setPassAudit(false);
-
-            //生成唯一id 替换uuid中的"-"
-            String userId= UUID.randomUUID().toString().replace("-", "");
-            comment.setUserId(userId);
-
-            boolean result = commentService.insertComment(comment);
+            boolean result = commentService.insertComment(commentDTO);
 
             if (result){
                 return ApiResponse.ok();

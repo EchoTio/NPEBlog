@@ -12,13 +12,17 @@ import java.util.List;
  */
 @Data
 public class DevelopLogDto {
-
+    // 主键
+    private long id;
     // 修复内容
     private List<String> content;
     // 问题修复时间
     private String createTime;
     // 修复者
     private String author;
+    // bug类型
+    private String bugType;
     // 多少时间前
     private String timeAgo;
+
 }

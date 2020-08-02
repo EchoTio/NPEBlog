@@ -5,14 +5,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
+ * 首页
  * @author Amadeus
  * @date 2019-12-16
- * 前端页面控制器
  */
-@Controller("homeController")
+@Controller
 @RequestMapping("/")
 @AllArgsConstructor
-public class IndexController {
+public class HomeController {
 
     /**
      * 跳转到首页

@@ -1,5 +1,6 @@
 package com.smallclover.nullpointerexception.mapper;
 
+import com.smallclover.nullpointerexception.model.ArticleTagCategory;
 import com.smallclover.nullpointerexception.model.Category;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
@@ -26,4 +27,6 @@ public interface CategoryMapper {
     @Insert("INSERT INTO category (category_name, update_time, create_time, delete_flag)" +
             "VALUE(#{categoryName}, #{updateTime}, #{createTime}, #{deleteFlag})")
     long insertCategory(Category category);
+
+    List<ArticleTagCategory> getCategoryByArticleIds(List<Long> articleIds);
 }

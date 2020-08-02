@@ -1,11 +1,15 @@
 package com.smallclover.nullpointerexception.service.developLog;
 
+import com.smallclover.nullpointerexception.dto.DevelopLogDto;
 import com.smallclover.nullpointerexception.mapper.DevelopLogMapper;
 import com.smallclover.nullpointerexception.model.DevelopLog;
+import com.smallclover.nullpointerexception.util.TimeUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Amadeus
@@ -22,8 +26,22 @@ public class DevelopLogServiceImpl implements DevelopLogService {
     }
 
     @Override
-    public List<DevelopLog> getAllDevelopLogs() {
-        return developLogMapper.selectAllDevelopLogs();
+    public List<DevelopLogDto> getAllDevelopLogs() {
+        List<DevelopLog> developLogList = developLogMapper.selectAllDevelopLogs();
+
+        List<DevelopLogDto> developLogDtoList = developLogList.stream().map(siteLog -> {
+            String timeAgo = TimeUtils.getFewTimeAgo(siteLog.getCreateTime());
+            var developLogDto = new DevelopLogDto();
+            developLogDto.setId(siteLog.getId());
+            developLogDto.setBugType(siteLog.getBugType());
+            developLogDto.setAuthor(siteLog.getAuthor());
+            developLogDto.setCreateTime(siteLog.getCreateTime());
+            developLogDto.setTimeAgo(timeAgo);
+            List<String> content = Arrays.asList(siteLog.getContent().split(","));
+            developLogDto.setContent(content);
+            return developLogDto;
+        }).collect(Collectors.toList());
+        return developLogDtoList;
     }
 
     @Override

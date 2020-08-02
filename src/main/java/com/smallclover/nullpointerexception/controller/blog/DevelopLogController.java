@@ -30,19 +30,9 @@ public class DevelopLogController {
      * @return 开发日志视图
      */
     @GetMapping(value = {"", "/"})
-    public String timeline(Model model){
-
-        var developLogDTOS = developLogService.getAllDevelopLogs().stream().map(siteLog -> {
-            String timeAgo = TimeUtils.getFewTimeAgo(siteLog.getCreateTime());
-            var developLogDTO = new DevelopLogDto();
-            developLogDTO.setAuthor(siteLog.getAuthor());
-            developLogDTO.setCreateTime(siteLog.getCreateTime());
-            developLogDTO.setTimeAgo(timeAgo);
-            List<String> content = Arrays.asList(siteLog.getContent().split(","));
-            developLogDTO.setContent(content);
-            return developLogDTO;
-        }).collect(Collectors.toList());
-        model.addAttribute("developLogs", developLogDTOS);
+    public String index(Model model){
+        List<DevelopLogDto> developLogDtoList = developLogService.getAllDevelopLogs();
+        model.addAttribute("developLogs", developLogDtoList);
         return "/blog/develop_log";
     }
 }

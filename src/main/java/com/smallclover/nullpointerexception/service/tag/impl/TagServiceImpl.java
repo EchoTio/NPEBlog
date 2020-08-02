@@ -17,8 +17,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
+ * 标签相关处理
  * @Author: Amadeus
  * @Date: 2020/7/2 22:00
  */
@@ -64,16 +66,6 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    public Map<Long, String> getCategoryByArticleIds(List<Long> articleIds) {
-        List<ArticleTagCategory> articleTagCategories = tagMapper.getCategoryByArticleIds(articleIds);
-        var articleIdAndCategoryMap = new HashMap<Long, String>();
-        for (ArticleTagCategory atc: articleTagCategories){
-            articleIdAndCategoryMap.put(atc.getArticleId(), atc.getCategoryName());
-        }
-        return articleIdAndCategoryMap;
-    }
-
-    @Override
     public boolean insertTags(String tags) {
         String[] tagNames = StringUtils.split(tags, " ");
         var tagList = new ArrayList<Tag>();
@@ -87,6 +79,31 @@ public class TagServiceImpl implements TagService {
         }
         long count = tagMapper.insertTags(tagList);
         return count >= 0;
+    }
+
+    @Override
+    public List<TagDto> getTagCloud() {
+        List<String> tagNames = getAllTags()
+                .stream()
+                .map(Tag::getTagName)
+                .collect(Collectors.toList());
+        List<Tag> tags = getTagsByTagNames(tagNames);
+        var map = new HashMap<String, Integer>();
+
+
+        // 标签名:权重
+        for (Tag tag: tags){
+            map.put(tag.getTagName(), map.getOrDefault(tag.getTagName(), 0) + 1);
+        }
+
+        var tagDtoList = new ArrayList<TagDto>();
+        for (Map.Entry<String, Integer> entry: map.entrySet()){
+            var tagDTO = new TagDto();
+            tagDTO.setWord(entry.getKey());
+            tagDTO.setCount(entry.getValue());
+            tagDtoList.add(tagDTO);
+        }
+        return tagDtoList;
     }
 
 }

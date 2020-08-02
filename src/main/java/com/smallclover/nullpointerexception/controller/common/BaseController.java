@@ -30,9 +30,7 @@ public class BaseController {
 
     @ModelAttribute
     public void webSiteConfig(Model model){
-        visitService.build("blog");
-        Map<Object, Object> articleViewMap = visitService.getArticleAccessRecord();
-        model.addAttribute("articleMap", articleViewMap);
+
 //        // 网站的配置信息
 //        var config = webSiteService.getWebSiteConfig();
 //        model.addAttribute("config", config);

@@ -24,9 +24,7 @@ public class VisitController {
     public @ResponseBody
     VisitDto visit(VisitReqDto reqDTO){
         VisitDto visitDTO = new VisitDto();
-        visitService.build("blog");
-        visitDTO.setTime(visitService.getArticleAccessRecord());
-        visitDTO.setAritcleCnt(visitService.getIpAccessRecordForArticleAll());
+
         return visitDTO;
     }
 }

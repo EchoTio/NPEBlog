@@ -31,7 +31,5 @@ public interface TagMapper {
 
     List<ArticleTagCategory> getTagsByArticleIds(List<Long> articleIds);
 
-    List<ArticleTagCategory> getCategoryByArticleIds(List<Long> articleIds);
-
     long insertTags(List<Tag> tags);
 }

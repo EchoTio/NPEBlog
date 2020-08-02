@@ -2,6 +2,7 @@ package com.smallclover.nullpointerexception.controller.admin;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.smallclover.nullpointerexception.dto.DevelopLogDto;
 import com.smallclover.nullpointerexception.model.Comment;
 import com.smallclover.nullpointerexception.model.DevelopLog;
 import com.smallclover.nullpointerexception.service.developLog.DevelopLogService;
@@ -41,9 +42,9 @@ public class DevelopLogManagerController {
                         @RequestParam(required = true, defaultValue = "10") Integer pageSize,
                         Model model){
         PageHelper.startPage(page, pageSize);
-        List<DevelopLog> developLogs = developLogService.getAllDevelopLogs();
-        var pageInfo = new PageInfo<>(developLogs);
-        model.addAttribute("developLogs", developLogs);
+        List<DevelopLogDto> developLogDtoList = developLogService.getAllDevelopLogs();
+        var pageInfo = new PageInfo<>(developLogDtoList);
+        model.addAttribute("developLogs", developLogDtoList);
         model.addAttribute("pageInfo", pageInfo);
      return "/admin/develop_log_manager";
     }

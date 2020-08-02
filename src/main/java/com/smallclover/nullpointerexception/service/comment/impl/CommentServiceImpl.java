@@ -7,8 +7,11 @@ import com.smallclover.nullpointerexception.service.comment.CommentService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * 评论管理服务层
@@ -52,7 +55,17 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public boolean insertComment(Comment comment) {
+    public boolean insertComment(CommentDto commentDto) {
+        var comment = new Comment();
+        BeanUtils.copyProperties(commentDto, comment);
+        comment.setCreateTime(Timestamp.valueOf(LocalDateTime.now()));
+        comment.setDeleteFlag(false);
+        comment.setPassAudit(false);
+
+        //生成唯一id 替换uuid中的"-"
+        String userId= UUID.randomUUID().toString().replace("-", "");
+        comment.setUserId(userId);
+
         long count = commentMapper.insertComment(comment);
         return count == 1 ;
     }

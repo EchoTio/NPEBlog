@@ -4,6 +4,7 @@ import com.smallclover.nullpointerexception.dto.ArticleDto;
 import com.smallclover.nullpointerexception.model.Article;
 import com.smallclover.nullpointerexception.mapper.ArticleMapper;
 import com.smallclover.nullpointerexception.service.article.ArticleService;
+import com.smallclover.nullpointerexception.service.category.CategoryService;
 import com.smallclover.nullpointerexception.service.tag.TagService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -28,6 +29,7 @@ public class ArticleServiceImpl implements ArticleService {
     // 文章Mapper
     private ArticleMapper articleMapper;
     private TagService tagService;
+    private CategoryService categoryService;
 
     /**
      * 查询所有文章
@@ -37,7 +39,7 @@ public class ArticleServiceImpl implements ArticleService {
     public List<ArticleDto> getAllArticles() {
         List<Article> articles = articleMapper.getAllArticles();
         List<Long> articleIds = articles.stream().map(Article::getId).collect(Collectors.toList());
-        var articleIdAndCategoryMap = tagService.getCategoryByArticleIds(articleIds);
+        var articleIdAndCategoryMap = categoryService.getCategoryByArticleIds(articleIds);
         var articleIdAndTagsMap = tagService.getTagsByArticleIds(articleIds);
 
         var articleDTOs = new ArrayList<ArticleDto>();

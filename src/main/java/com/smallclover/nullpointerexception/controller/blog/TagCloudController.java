@@ -15,6 +15,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
+ * 标签云
  * @Author: Amadeus
  * @Date: 2020/6/23 21:36
  */
@@ -24,7 +25,6 @@ import java.util.stream.Collectors;
 public class TagCloudController {
 
     private TagService tagService;
-    private ArticleService articleService;
 
     @RequestMapping(value = {"/",""})
     public String index()
@@ -38,31 +38,16 @@ public class TagCloudController {
      */
     @RequestMapping("/json")
     public ResponseEntity<List<TagDto>> tagCloud(){
-
-        List<String> tagNames = tagService.getAllTags()
-                .stream()
-                .map(Tag::getTagName)
-                .collect(Collectors.toList());
-        List<Tag> tags = tagService.getTagsByTagNames(tagNames);
-        var map = new HashMap<String, Integer>();
-
-
-        // 标签名:权重
-        for (Tag tag: tags){
-            map.put(tag.getTagName(), map.getOrDefault(tag.getTagName(), 0) + 1);
-        }
-
-        var tagDTOs = new ArrayList<TagDto>();
-        for (Map.Entry<String, Integer> entry: map.entrySet()){
-            var tagDTO = new TagDto();
-            tagDTO.setWord(entry.getKey());
-            tagDTO.setCount(entry.getValue());
-            tagDTOs.add(tagDTO);
-        }
-
-        return ResponseEntity.ok(tagDTOs);
+        List<TagDto> tagDtoList = tagService.getTagCloud();
+        return ResponseEntity.ok(tagDtoList);
     }
 
+    /**
+     * 根据标签名字，取得该标签名下所有的文章
+     * @param tagName
+     * @param model
+     * @return
+     */
     @RequestMapping("/{tag_name}")
     public String getTagNameHoldArticles(@PathVariable("tag_name") String tagName, Model model){
 

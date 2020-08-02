@@ -3,7 +3,7 @@ package com.smallclover.nullpointerexception.model;
 import lombok.Data;
 
 /**
- * 网站更新日志实体类
+ * 网站开发日志
  *
  * @author Amadeus
  * @date 2020-01-19

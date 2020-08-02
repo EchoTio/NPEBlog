@@ -1,13 +1,16 @@
 package com.smallclover.nullpointerexception.service.category.impl;
 
 import com.smallclover.nullpointerexception.mapper.CategoryMapper;
+import com.smallclover.nullpointerexception.model.ArticleTagCategory;
 import com.smallclover.nullpointerexception.model.Category;
 import com.smallclover.nullpointerexception.service.category.CategoryService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: Amadeus
@@ -32,5 +35,16 @@ public class CategoryServiceImpl implements CategoryService {
         category.setDeleteFlag(false);
         long count =categoryMapper.insertCategory(category);
         return count >= 0;
+    }
+
+
+    @Override
+    public Map<Long, String> getCategoryByArticleIds(List<Long> articleIds) {
+        List<ArticleTagCategory> articleTagCategories = categoryMapper.getCategoryByArticleIds(articleIds);
+        var articleIdAndCategoryMap = new HashMap<Long, String>();
+        for (ArticleTagCategory atc: articleTagCategories){
+            articleIdAndCategoryMap.put(atc.getArticleId(), atc.getCategoryName());
+        }
+        return articleIdAndCategoryMap;
     }
 }
