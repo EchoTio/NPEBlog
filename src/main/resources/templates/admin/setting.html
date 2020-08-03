@@ -155,11 +155,19 @@
             if (modifiedGithub === originGithub){
                 modifiedGithub = null;
             }
-            console.log("test")
+
+            let setting = {
+                id:id,
+                siteName:originSiteName,
+                siteDesc:originSiteDesc,
+                appVersion:originAppVersion,
+                github:originGithub
+            }
+
             Swal.fire({
                 title: '更新',
                 text: "确定要更新?",
-                type: 'question',
+                icon: 'question',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
@@ -167,18 +175,14 @@
                 cancelButtonText:'取消',
             }).then((result) => {
                 console.log("result")
+                console.log(JSON.stringify(setting))
                 if (result.value) {
                     $.ajax({
                         url: /*[[@{/admin/setting/update}]]*/"",
-                        data: {
-                            id: id,
-                            modifiedSiteName:modifiedSiteName,
-                            modifiedSiteDesc:modifiedSiteDesc,
-                            modifiedAppVersion:modifiedAppVersion,
-                            modifiedGithub:modifiedGithub,
-                        },
+                        data: JSON.stringify(setting),
                         type: "POST",
-                        dataType: "text",
+                        dataType: "json",
+                        contentType:"application/json",
                         success: function(data) {
                             console.log("success");
                             Swal.fire(

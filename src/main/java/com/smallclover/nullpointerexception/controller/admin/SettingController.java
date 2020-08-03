@@ -1,8 +1,10 @@
 package com.smallclover.nullpointerexception.controller.admin;
 
+import com.smallclover.nullpointerexception.dto.SettingDto;
 import com.smallclover.nullpointerexception.model.Setting;
 import com.smallclover.nullpointerexception.service.setting.SettingService;
 import com.smallclover.nullpointerexception.service.site.SiteService;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,40 +20,26 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/admin/setting")
 @Slf4j
+@AllArgsConstructor
 public class SettingController {
 
-    @Autowired
     SettingService settingService;
 
-    @GetMapping("")
+    @GetMapping(value = {"", "/"})
     public String index(Model model){
-        Setting setting = settingService.getAllSetting();
-        model.addAttribute("setting", setting);
+        SettingDto settingDto = settingService.getAllSetting();
+        model.addAttribute("setting", settingDto);
         return "/admin/setting";
     }
 
     /**
-     * 系统配置更新
-     * @param id id
-     * @param siteName 站点名称
-     * @param siteDesc 站点描述
-     * @param appVersion app 版本
-     * @param github github 链接
+     * 系统设置更新
+     * @param settingDto
      * @return
      */
     @PostMapping("/update")
-    public @ResponseBody ResponseEntity update(@RequestParam("id") String id,
-                                               @RequestParam("modifiedSiteName") String siteName,
-                                               @RequestParam("modifiedSiteDesc") String siteDesc,
-                                               @RequestParam("modifiedAppVersion") String appVersion,
-                                               @RequestParam("modifiedGithub") String github){
-        Setting setting = new Setting();
-        setting.setId(Long.parseLong(id));
-        setting.setAppVersion(appVersion);
-        setting.setSiteName(siteName);
-        setting.setSiteDesc(siteDesc);
-        setting.setGithub(github);
-        boolean result = settingService.updateSystemSetting(setting);
+    public @ResponseBody ResponseEntity update(@RequestBody SettingDto settingDto){
+        boolean result = settingService.updateSystemSetting(settingDto);
         if(result){
             return ResponseEntity.ok().body("success");
         }

@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 
 /**
+ * 管理后台首页
  * @author Amadeus
  * @date 2020-01-19
- * 管理后台首页
  */
 @Controller
 @RequestMapping("/admin")

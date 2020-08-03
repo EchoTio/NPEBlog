@@ -1,5 +1,6 @@
 package com.smallclover.nullpointerexception.service.setting;
 
+import com.smallclover.nullpointerexception.dto.SettingDto;
 import com.smallclover.nullpointerexception.model.Setting;
 
 /**
@@ -8,7 +9,7 @@ import com.smallclover.nullpointerexception.model.Setting;
  */
 public interface SettingService {
 
-    public Setting getAllSetting();
+    public SettingDto getAllSetting();
 
-    public boolean updateSystemSetting(Setting setting);
+    public boolean updateSystemSetting(SettingDto settingDto);
 }
