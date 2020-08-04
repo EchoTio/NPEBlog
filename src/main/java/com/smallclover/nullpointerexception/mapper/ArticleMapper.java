@@ -5,6 +5,7 @@ import com.smallclover.nullpointerexception.model.DevelopLog;
 import org.apache.ibatis.annotations.*;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.List;
 public interface ArticleMapper {
 
     //TODO simplekey替换
-
+    //TODO 缓存失效问题
     /**
      * 查找所有文章
      * @return 返回所有文章列表
@@ -74,6 +75,10 @@ public interface ArticleMapper {
     long insertArticle(Article article);
 
     @Update("UPDATE article SET delete_flag=#{deleteFlag} WHERE id = #{articleId}")
+    @Caching(evict = {
+            @CacheEvict(cacheNames = "article", key = "#articleId"),
+            @CacheEvict(cacheNames = "articles", allEntries = true)
+    })
     long deleteArticleById(long articleId,boolean deleteFlag);
 
     @Update("UPDATE article SET status=#{status},publish=#{publish} WHERE id = #{articleId}")

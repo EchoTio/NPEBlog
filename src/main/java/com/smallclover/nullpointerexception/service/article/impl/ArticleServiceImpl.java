@@ -11,6 +11,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * 文章操作服务层实现类
+ * 文章操作实现
  * @author Amadeus
  * @date 2019-11-25
  */
@@ -31,10 +32,6 @@ public class ArticleServiceImpl implements ArticleService {
     private TagService tagService;
     private CategoryService categoryService;
 
-    /**
-     * 查询所有文章
-     * @return 包含所有文章的列表
-     */
     @Override
     public List<ArticleDto> getAllArticles() {
         List<Article> articles = articleMapper.getAllArticles();
@@ -58,42 +55,39 @@ public class ArticleServiceImpl implements ArticleService {
         return articleMapper.getAllArticles();
     }
 
-    /**
-     * 根据文章id来获取文章
-     * @param id 文章id
-     * @return 文章实体类
-     */
     @Override
     public Article getArticleById(long id) {
         return articleMapper.getArticleById(id);
     }
 
-    /**
-     * 获取文章总数
-     * @return 文章总数
-     */
     @Override
     public long getArticleCount() {
         return articleMapper.getArticleCount();
     }
 
-    @Caching(evict = {
-            @CacheEvict(cacheNames = "article", key = "#articleId"),
-            @CacheEvict(cacheNames = "articles", allEntries = true)
-    })
     @Override
     public boolean deleteArticleById(long articleId) {
         return articleMapper.deleteArticleById(articleId, true) > 0;
     }
 
+    @Transactional
     @Override
-    public boolean insertArticle(Article article) {
+    public boolean insertArticle(ArticleDto articleDto) {
+        // 同时插入多张表tag,category,article,tag_article, category_article所以需要事务
+        // TODO标签名null问题
+        boolean test = tagService.insertTags(articleDto.getTags());
+        if (test){
+            throw new RuntimeException("事务出现异常");
+        }
+        categoryService.insertCategory(articleDto.getCategory());
+        var article = new Article();
+        BeanUtils.copyProperties(articleDto, article);
         // 浏览量
         article.setContentView(0);
         // 文章创建时间
         article.setCreateTime(new Timestamp(System.currentTimeMillis()));
-
         long count = articleMapper.insertArticle(article);
+
 
         return count != 0 ;
     }

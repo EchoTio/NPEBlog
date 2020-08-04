@@ -64,8 +64,7 @@ public class AttachController {
     @ResponseBody
     public ResponseEntity filesUpload(
             @RequestParam(name = "files[]", required = true) MultipartFile[] files,
-            HttpServletRequest request
-            ){
+            HttpServletRequest request){
         log.info(String.valueOf(files.length));
         for (MultipartFile file : files) {
             log.info(file.getName());

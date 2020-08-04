@@ -12,13 +12,13 @@ import java.util.List;
  */
 public interface ArticleService {
     /**
-     * 取得所有文章
+     * 取得所有文章包括分类
      * @return 文章实体类列表
      */
     List<ArticleDto> getAllArticles();
 
     /**
-     * 取得所有文章
+     * 取得所有文章不包括分类
      * @return 文章实体类列表
      */
     List<Article> getAllArticleNoCategory();
@@ -41,7 +41,12 @@ public interface ArticleService {
      */
     boolean deleteArticleById(long articleId);
 
-    boolean insertArticle(Article article);
+    /**
+     * 上传一篇新的文章
+     * @param articleDto
+     * @return
+     */
+    boolean insertArticle(ArticleDto articleDto);
 
     boolean publishArticle(long articleId);
 

@@ -108,7 +108,8 @@
                                 </td>
                                 <td class="text-center">
                                     <!--/* 双层嵌套 */-->
-                                    <span th:text="${articleMap['__${article.id}__']}"></span>
+<!--                                    <span th:text="${articleMap['__${article.id}__']}"></span>-->
+                                    <span th:text="${article.contentView}"></span>
                                 </td>
                                 <td class="text-center">
                                     [[${article.category}]]

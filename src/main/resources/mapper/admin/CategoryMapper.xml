@@ -12,8 +12,8 @@
 
 
     <select id="getCategoryByArticleIds" resultMap="articleTagCategory">
-        SELECT * FROM category_article ca INNER  JOIN  article a ON ca.article_id = a.id
-        WHERE ca.delete_flag = false AND a.delete_flag = false
+        SELECT * FROM category_article ca INNER  JOIN  category cate ON ca.category_id = cate.id
+        WHERE ca.delete_flag = false AND cate.delete_flag = false
         AND ca.article_id IN
         <foreach collection="list" item="articleId" index="index"
                  open="(" separator="," close=")">

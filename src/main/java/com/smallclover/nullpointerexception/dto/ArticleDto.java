@@ -32,6 +32,8 @@ public class ArticleDto {
     // 标签
     @NotBlank(message = "标签不能为空")
     private String tags;
+    // 文章浏览量(点击量)
+    private int contentView;
     // 是否开启评论
     private boolean comment;
     // 是否是草稿

@@ -31,7 +31,7 @@ public class ArticleManagerController {
     @GetMapping("")
     public ModelAndView index(@RequestParam(required = true, defaultValue = "1") Integer page,
                               @RequestParam(required = true, defaultValue = "10") Integer pageSize){
-        //TODO 分页问题
+        // 只有执行mapper时才会使用pageHelper进行分页
         PageHelper.startPage(page, pageSize);
         var articleList = articleService.getAllArticles();
         var pageInfo = new PageInfo<>(articleList);
@@ -39,7 +39,6 @@ public class ArticleManagerController {
         mv.setViewName("/admin/article_manager");
         mv.addObject("articles", articleList);
         mv.addObject("pageInfo", pageInfo);
-
         return mv;
     }
 

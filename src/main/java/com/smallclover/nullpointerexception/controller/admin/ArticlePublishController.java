@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,6 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * 文章发布
  * @author Amadeus
  * @date 2020-04-04
  */
@@ -51,14 +53,8 @@ public class ArticlePublishController {
      */
     @PostMapping("/add/content")
     public ResponseEntity addArticle(@Valid @RequestBody ArticleDto articleDTO){
-        //TODO 事务
-        var article = new Article();
-        tagService.insertTags(articleDTO.getTags());
-
-        String category = articleDTO.getCategory();
-        categoryService.insertCategory(category);
-        BeanUtils.copyProperties(articleDTO, article);
-        articleService.insertArticle(article);
+        // TODO 返回结果处理
+        articleService.insertArticle(articleDTO);
         // TODO 缓存成功页面没有跳转
         return ResponseEntity.ok().build();
     }
@@ -77,7 +73,6 @@ public class ArticlePublishController {
         map.put("success", 1);
         map.put("message", "test");
         map.put("url", ARTICLE_IMG_URL + pic.getOriginalFilename());
-
         return map;
     }
 }
