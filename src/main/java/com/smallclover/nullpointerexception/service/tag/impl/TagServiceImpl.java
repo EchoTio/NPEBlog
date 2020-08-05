@@ -13,10 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -31,6 +28,7 @@ public class TagServiceImpl implements TagService {
     private TagMapper tagMapper;
     private TagArticleMapper tagArticleMapper;
     private ArticleMapper articleMapper;
+    public static final String DELIMITER = ",";
 
     @Override
     public List<Tag> getAllTags() {
@@ -67,18 +65,29 @@ public class TagServiceImpl implements TagService {
 
     @Override
     public boolean insertTags(String tags) {
-        String[] tagNames = StringUtils.split(tags, " ");
-        var tagList = new ArrayList<Tag>();
-        for (String tagName: tagNames){
+        String[] tagNames = StringUtils.split(tags,DELIMITER);
+        long count = 0;
+        if (Objects.isNull(tagNames)){
             var tag = new Tag();
-            tag.setTagName(tagName);
+            tag.setTagName(tags);
             tag.setCreateTime(LocalDateTime.now());
             tag.setUpdateTime(LocalDateTime.now());
             tag.setDeleteFlag(false);
-            tagList.add(tag);
+            count = tagMapper.insertTag(tag);
+        }else{
+            var tagList = new ArrayList<Tag>();
+            for (String tagName: tagNames){
+                var tag = new Tag();
+                tag.setTagName(tagName);
+                tag.setCreateTime(LocalDateTime.now());
+                tag.setUpdateTime(LocalDateTime.now());
+                tag.setDeleteFlag(false);
+                tagList.add(tag);
+            }
+            count = tagMapper.insertTags(tagList);
         }
-        long count = tagMapper.insertTags(tagList);
-        return count >= 0;
+
+        return count > 0;
     }
 
     @Override
@@ -106,4 +115,9 @@ public class TagServiceImpl implements TagService {
         return tagDtoList;
     }
 
+    public static void main(String[] args) {
+        String tags = "hello,hi";
+        String[] strs = StringUtils.split(tags,DELIMITER);
+        Arrays.asList(strs).forEach(System.out::println);
+    }
 }

@@ -74,12 +74,10 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public boolean insertArticle(ArticleDto articleDto) {
         // 同时插入多张表tag,category,article,tag_article, category_article所以需要事务
-        // TODO标签名null问题
-        boolean test = tagService.insertTags(articleDto.getTags());
-        if (test){
-            throw new RuntimeException("事务出现异常");
-        }
+        tagService.insertTags(articleDto.getTags());
+
         categoryService.insertCategory(articleDto.getCategory());
+
         var article = new Article();
         BeanUtils.copyProperties(articleDto, article);
         // 浏览量
@@ -88,6 +86,7 @@ public class ArticleServiceImpl implements ArticleService {
         article.setCreateTime(new Timestamp(System.currentTimeMillis()));
         long count = articleMapper.insertArticle(article);
 
+        //TODO tag_article category_article
 
         return count != 0 ;
     }

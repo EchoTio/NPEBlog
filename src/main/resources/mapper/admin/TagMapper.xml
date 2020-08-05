@@ -43,7 +43,16 @@
         INSERT INTO tag (tag_name, update_time, create_time, delete_flag)
         VALUES
         <foreach collection="list" item="tag" separator=",">
-            (#{tag.tagName}, #{tag.updateTime}, #{createTime}, #{deleteFlag})
+            (#{tag.tagName}, #{tag.updateTime}, #{tag.createTime}, #{tag.deleteFlag})
         </foreach>
     </insert>
+
+    <insert id="insertTag">
+        INSERT INTO tag (tag_name, update_time, create_time, delete_flag)
+        VALUES(#{tagName}, #{updateTime}, #{createTime}, #{deleteFlag})
+    </insert>
+
+<!--    <insert id="insertTagArticle" >-->
+<!--        INSERT INTO tag_article(tag_id, article_id, create_time, delete_flag) -->
+<!--    </insert>-->
 </mapper>
