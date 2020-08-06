@@ -52,6 +52,12 @@
         VALUES(#{tagName}, #{updateTime}, #{createTime}, #{deleteFlag})
     </insert>
 
+    <select id="getTagsFormTagByTagNames" resultMap="tag">
+        SELECT * FROM tag WHERE tag.tag_name IN
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
 <!--    <insert id="insertTagArticle" >-->
 <!--        INSERT INTO tag_article(tag_id, article_id, create_time, delete_flag) -->
 <!--    </insert>-->

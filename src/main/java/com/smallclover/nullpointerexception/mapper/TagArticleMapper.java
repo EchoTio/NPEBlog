@@ -26,4 +26,6 @@ public interface TagArticleMapper {
             @Result(property = "deleteFlag", column = "delete_flag")
     })
     List<TagArticle> getAllTagByArticleId(long articleId);
+
+    long insertTagArticles(List<TagArticle> tagArticleList);
 }

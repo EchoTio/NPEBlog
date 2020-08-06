@@ -20,5 +20,4 @@
             #{articleId}
         </foreach>
     </select>
-
 </mapper>

@@ -48,4 +48,9 @@ public class CategoryServiceImpl implements CategoryService {
         }
         return articleIdAndCategoryMap;
     }
+
+    @Override
+    public Category getCategoryByCategoryName(String categoryName) {
+        return categoryMapper.getCategoryByCategoryName(categoryName);
+    }
 }

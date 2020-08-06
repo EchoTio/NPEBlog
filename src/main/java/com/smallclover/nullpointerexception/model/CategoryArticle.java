@@ -9,9 +9,9 @@ import java.time.LocalDateTime;
  * @Date: 2020/7/11 16:37
  */
 @Data
-public class TagArticle {
+public class CategoryArticle {
     private long id;
-    private long tagId;
+    private long categoryId;
     private long articleId;
     private LocalDateTime createTime;
     private boolean deleteFlag;

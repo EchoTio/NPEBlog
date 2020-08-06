@@ -30,4 +30,6 @@ public interface CategoryService {
      * @return
      */
     Map<Long, String> getCategoryByArticleIds(List<Long> articleIds);
+
+    Category getCategoryByCategoryName(String categoryName);
 }
