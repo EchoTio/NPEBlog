@@ -2,6 +2,7 @@ package com.smallclover.nullpointerexception.controller.admin;
 
 import com.smallclover.nullpointerexception.dto.ArticleDto;
 import com.smallclover.nullpointerexception.model.Article;
+import com.smallclover.nullpointerexception.model.Category;
 import com.smallclover.nullpointerexception.service.article.ArticleService;
 import com.smallclover.nullpointerexception.service.article.FileService;
 import com.smallclover.nullpointerexception.service.category.CategoryService;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -42,8 +44,9 @@ public class ArticlePublishController {
     @GetMapping("/publish")
     public ModelAndView articlePublish(){
         var mv = new ModelAndView();
+        List<Category> categoryList = categoryService.selectAllCategories();
+        mv.addObject("categorys", categoryList);
         mv.setViewName("/admin/article_publish");
-        //TODO category 数据
         return mv;
     }
 
@@ -54,10 +57,11 @@ public class ArticlePublishController {
      */
     @PostMapping("/add/content")
     public ResponseEntity addArticle(@Valid @RequestBody ArticleDto articleDTO){
-        // TODO 返回结果处理
-        articleService.insertArticle(articleDTO);
-        // TODO 缓存成功页面没有跳转
-        return ResponseEntity.ok().build();
+        boolean result = articleService.insertArticle(articleDTO);
+        if (result){
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.badRequest().build();
     }
 
 

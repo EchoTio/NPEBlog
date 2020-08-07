@@ -28,6 +28,7 @@ public class AccessRecordInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        //TODO 改进redis存储的格式
         String userAgent = request.getHeader("User-Agent");
         String ip = IPAddressUtils.getIpAddress(request);
         String uri = request.getRequestURI();

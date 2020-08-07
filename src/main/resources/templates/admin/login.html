@@ -4,7 +4,6 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>NPE Admin | Log in</title>
-  <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!--/* 在使用thymeleaf的@{}标签的时候注意，如果路径前面有'/'那么最终输出的路径是相对根目录的路径 */-->
   <!--/* 如果不加入'/'那么该路径就是相对当前请求的路径就会出现'/admin/admin/..'这个错误的路径 */-->
@@ -112,15 +111,6 @@
       login()
     }
   })
-
-  // //登录共通
-  // function login(){
-  //   $("#submit_button").attr("disabled", true);
-  //   // 使用这种方式的时候要注意，表单及其子元素的name或者id不要使用诸如submit，length，method等名字，会出现冲突
-  //   // 导致submit方法会失效
-  //   $("#login_form").submit();
-  //   setTimeout("$('#submit_button').removeAttr('disabled')", 3000);// 设置三秒后显示登录按钮
-  // }
 
   // 校验成功提交
   function login() {

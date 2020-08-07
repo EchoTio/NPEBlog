@@ -1,9 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:with="title='发布文章', active='article-publish'">
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -72,13 +68,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <select id="category" class="form-control" style="width: 100%;">
-                                            <option selected="selected">技术</option>
-                                            <option>旅行</option>
-                                            <option>日常</option>
-                                            <option>吐槽</option>
-                                            <option>语言</option>
-                                            <option>其他</option>
-                                            <option>待定</option>
+                                            <div th:each="category: ${categorys}">
+                                                <option>[[${category.categoryName}]]</option>
+                                            </div>
                                         </select>
                                     </div>
                                 </div>
@@ -202,7 +194,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
         tags = $('#input_tags').val();
     });
 
-    console.log(tags);
     // 获取默认值
     let selectorCategory = $('#category');
     let category = selectorCategory.find("option:selected").text();
@@ -249,6 +240,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     '文章发布成功',
                     'success'
                 )
+                window.location.href="/admin/article/manager/";
             },
             error: function (data) {
                 console.log(data);
