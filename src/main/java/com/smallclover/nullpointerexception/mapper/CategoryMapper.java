@@ -28,8 +28,6 @@ public interface CategoryMapper {
             "VALUE(#{categoryName}, #{updateTime}, #{createTime}, #{deleteFlag})")
     long insertCategory(Category category);
 
-    List<ArticleTagCategory> getCategoryByArticleIds(List<Long> articleIds);
-
     @Select("SELECT * FROM category WHERE category_name = #{categoryName}")
     @ResultMap("category")
     Category getCategoryByCategoryName(String categoryName);

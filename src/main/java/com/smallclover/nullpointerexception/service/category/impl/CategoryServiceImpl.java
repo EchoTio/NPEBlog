@@ -1,5 +1,6 @@
 package com.smallclover.nullpointerexception.service.category.impl;
 
+import com.smallclover.nullpointerexception.mapper.CategoryArticleMapper;
 import com.smallclover.nullpointerexception.mapper.CategoryMapper;
 import com.smallclover.nullpointerexception.model.ArticleTagCategory;
 import com.smallclover.nullpointerexception.model.Category;
@@ -22,6 +23,7 @@ import java.util.Map;
 public class CategoryServiceImpl implements CategoryService {
 
     private CategoryMapper categoryMapper;
+    private CategoryArticleMapper categoryArticleMapper;
 
     public List<Category> selectAllCategories(){
         return categoryMapper.selectAllCategories();
@@ -41,7 +43,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Map<Long, String> getCategoryByArticleIds(List<Long> articleIds) {
-        List<ArticleTagCategory> articleTagCategories = categoryMapper.getCategoryByArticleIds(articleIds);
+        List<ArticleTagCategory> articleTagCategories = categoryArticleMapper.getCategoryByArticleIds(articleIds);
         var articleIdAndCategoryMap = new HashMap<Long, String>();
         for (ArticleTagCategory atc: articleTagCategories){
             articleIdAndCategoryMap.put(atc.getArticleId(), atc.getCategoryName());

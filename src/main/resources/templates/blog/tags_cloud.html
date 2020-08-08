@@ -35,8 +35,8 @@
 </th:block>
 
 <!-- word cloud -->
-<script th:src="@{/plugins/d3/d3.min.js}" type="text/javascript"></script>
-<script th:src="@{/plugins/d3/d3.layout.cloud.js}" type="text/javascript" ></script>
+<script th:src="@{/blog/plugins/d3/d3.min.js}" type="text/javascript"></script>
+<script th:src="@{/blog/plugins/d3/d3.layout.cloud.js}" type="text/javascript" ></script>
 <script type="text/javascript" th:inline="javascript">
     $(document).ready(function(){
         var DATA_FILE_PATH = /*[[@{/blog/tags-cloud/json}]]*/"/blog/tags-cloud/json"; //从后台获取标签数据

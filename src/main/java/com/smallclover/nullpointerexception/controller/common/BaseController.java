@@ -19,8 +19,6 @@ import java.util.Map;
 @AllArgsConstructor
 public class BaseController {
 
-    private VisitService visitService;
-
 //    // 获取网站信息
 //    private WebSiteService webSiteService;
 //

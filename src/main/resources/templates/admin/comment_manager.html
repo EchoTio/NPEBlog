@@ -108,6 +108,13 @@
                                             审核通过
                                         </a>
                                     </th:block>
+                                    <th:block th:if="${comment.passAudit}">
+                                        <a href="#" class="btn btn-success btn-sm disabled">
+                                            <i class="fas fa-pencil-alt">
+                                            </i>
+                                            审核通过
+                                        </a>
+                                    </th:block>
                                     <a class="btn btn-danger btn-sm" href="#">
                                         <i class="fas fa-trash">
                                         </i>

@@ -100,13 +100,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         web.ignoring()
                 // 静态资源
-                .antMatchers("/css/**")
-                .antMatchers("/img/**")
-                .antMatchers("/js/**")
                 .antMatchers("/admin/dist/**")
                 .antMatchers("/admin/plugins/**")
                 .antMatchers("/upload/**")
-                .antMatchers("/plugins/**")
                 // 可以直接访问的页面
                 .antMatchers("/")
                 .antMatchers("/index")

@@ -16,4 +16,6 @@ import java.util.List;
 @Repository
 public interface CategoryArticleMapper {
     long insertCategoryArticle(CategoryArticle categoryArticle);
+
+    List<ArticleTagCategory> getCategoryByArticleIds(List<Long> articleIds);
 }
