@@ -34,7 +34,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-mail'
     // 在当前版本（具体那个版本没有仔细调查，starter-web中已经不包括bean validationJSR303标准了，移动到下面这个starter中俄）
     implementation 'org.springframework.boot:spring-boot-starter-validation'
-
+    // swagger starter 依赖
+    implementation 'io.springfox:springfox-boot-starter:3.0.0'
 
 
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5:3.0.4.RELEASE'
