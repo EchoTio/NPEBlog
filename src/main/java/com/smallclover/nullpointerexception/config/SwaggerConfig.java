@@ -1,5 +1,6 @@
 package com.smallclover.nullpointerexception.config;
 
+import com.smallclover.nullpointerexception.property.SwaggerInfo;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -17,6 +18,12 @@ import springfox.documentation.spring.web.plugins.Docket;
 @Configuration
 public class SwaggerConfig {
 
+    private final SwaggerInfo swaggerInfo;
+
+    public SwaggerConfig(SwaggerInfo swaggerInfo) {
+        this.swaggerInfo = swaggerInfo;
+    }
+
     @Bean
     public Docket createSwaggerDoc(){
         return new Docket(DocumentationType.OAS_30)
@@ -25,10 +32,10 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo(){
         return new ApiInfoBuilder()
-                .title("NPE 文档接口")
-                .description("api接口描述")
-                .contact(new Contact("叶子", "https://www.github.com/smallclover", "18363998103@163.com"))
-                .version("1.0")
+                .title(swaggerInfo.getTitle())
+                .description(swaggerInfo.getDescription())
+                .contact(new Contact(swaggerInfo.getContactName(), swaggerInfo.getContactUrl(), swaggerInfo.getContactEmail()))
+                .version(swaggerInfo.getVersion())
                 .build();
     }
 }
